@@ -34,7 +34,7 @@ const SignIn = (props) => {
       <SignInPage>
          <FormContainer onSubmit={login}>
             <TitleContainer>
-               <Title>Login</Title>
+               <Title>Sign In</Title>
             </TitleContainer>
             <FormInput
                value={email}
@@ -55,7 +55,8 @@ const SignIn = (props) => {
                Login
             </SubmitButton>
             <SignUpLinkContainer>
-               Don't have an account? <SignUpLink>Create One</SignUpLink>
+               Don't have an account?{" "}
+               <SignUpLink to="/sign-up">Create One</SignUpLink>
             </SignUpLinkContainer>
          </FormContainer>
       </SignInPage>

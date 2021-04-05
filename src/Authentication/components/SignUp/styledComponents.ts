@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import Input from "../../../Common/components/Input";
 import Button from "../../../Common/components/Button";
 
-export const SignInPage = styled.div`
+export const SignUpPage = styled.div`
    ${tw`
-        flex flex-col justify-center items-center h-screen
+        h-screen flex flex-col items-center justify-center
     `}
 `;
 
@@ -45,13 +45,13 @@ export const SubmitButton = styled(Button)`
    }
 `;
 
-export const SignUpLinkContainer = styled.span`
+export const SignInLinkContainer = styled.span`
    ${tw`
         text-gray3 text-xs mt-16px mx-auto
     `}
 `;
 
-export const SignUpLink = styled(Link)`
+export const SignInLink = styled(Link)`
    ${tw`
         text-persianBlue cursor-pointer
     `}
