@@ -113,7 +113,9 @@ export const EndIconContainer = styled(IconContainer)`
    right: 8px;
 `;
 
-export const Icon = styled.i``;
+export const Icon = styled.i`
+   ${({ iconColor }) => `color: ${iconColor}`}
+`;
 
 export const TextInput = styled.input(
    ({ error, size, shape, color, disabled, fullWidth, startIcon, endIcon }) => [

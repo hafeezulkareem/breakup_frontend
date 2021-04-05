@@ -1,6 +1,6 @@
-import React, { Component, ReactNode } from 'react'
+import React, { Component, ReactNode } from "react";
 
-import { colors, shapes, sizes } from './constants'
+import { colors, shapes, sizes } from "./constants";
 import {
    EndIconContainer,
    Icon,
@@ -11,35 +11,36 @@ import {
    StartIconContainer,
    TextArea,
    TextInput,
-} from './styledComponents'
+} from "./styledComponents";
 
 interface InputProps {
-   label: string
-   error: boolean
-   disabled: boolean
-   size: string
-   color: string
-   shape: string
-   fullWidth: boolean
-   multiline: boolean
-   rows: number
-   startIcon: string
-   endIcon: string
-   onChangeInput: (event: React.FormEvent<HTMLInputElement>) => void
-   input: string
-   hint: string
-   type: string
-   placeholder: string
-   className: string
+   label: string;
+   error: boolean;
+   disabled: boolean;
+   size: string;
+   color: string;
+   shape: string;
+   fullWidth: boolean;
+   multiline: boolean;
+   rows: number;
+   startIcon: string;
+   endIcon: string;
+   onChangeInput: (event: React.FormEvent<HTMLInputElement>) => void;
+   input: string;
+   hint: string;
+   type: string;
+   placeholder: string;
+   className: string;
+   iconColor: string;
 }
 
 class Input extends Component<InputProps> {
    state = {
       hasFocused: false,
-   }
+   };
 
    static defaultProps = {
-      label: '',
+      label: "",
       error: false,
       disabled: false,
       size: sizes.medium,
@@ -48,45 +49,50 @@ class Input extends Component<InputProps> {
       fullWidth: false,
       multiline: false,
       rows: 0,
-      startIcon: '',
-      endIcon: '',
-      placeholder: 'Enter text',
+      startIcon: "",
+      endIcon: "",
+      placeholder: "Enter text",
       onChangeInput: () => {},
-      input: '',
-      hint: '',
-      type: 'text',
-      className: '',
-   }
+      input: "",
+      hint: "",
+      type: "text",
+      className: "",
+      iconColor: "black",
+   };
 
-   static sizes = sizes
-   static colors = colors
-   static shapes = shapes
+   static sizes = sizes;
+   static colors = colors;
+   static shapes = shapes;
 
    renderStartIcon = (): ReactNode => {
-      const { startIcon, multiline } = this.props
+      const { startIcon, multiline, iconColor } = this.props;
       return startIcon && !multiline ? (
          <StartIconContainer>
-            <Icon className='material-icons'>{startIcon}</Icon>
+            <Icon className="material-icons" iconColor={iconColor}>
+               {startIcon}
+            </Icon>
          </StartIconContainer>
-      ) : null
-   }
+      ) : null;
+   };
 
    renderEndIcon = (): ReactNode => {
-      const { endIcon, multiline } = this.props
+      const { endIcon, multiline, iconColor } = this.props;
       return endIcon && !multiline ? (
          <EndIconContainer>
-            <Icon className='material-icons'>{endIcon}</Icon>
+            <Icon className="material-icons" iconColor={iconColor}>
+               {endIcon}
+            </Icon>
          </EndIconContainer>
-      ) : null
-   }
+      ) : null;
+   };
 
    onFocus = (): void => {
-      this.setState({ hasFocused: true })
-   }
+      this.setState({ hasFocused: true });
+   };
 
    onBlur = (): void => {
-      this.setState({ hasFocused: false })
-   }
+      this.setState({ hasFocused: false });
+   };
 
    renderInputOrTextArea = (): ReactNode => {
       const {
@@ -108,7 +114,7 @@ class Input extends Component<InputProps> {
          endIcon,
          className,
          ...other
-      } = this.props
+      } = this.props;
       return multiline ? (
          <TextArea
             type={type}
@@ -148,12 +154,12 @@ class Input extends Component<InputProps> {
             endIcon={endIcon}
             {...other}
          />
-      )
-   }
+      );
+   };
 
    render() {
-      const { label, hint, color, error } = this.props
-      const { hasFocused } = this.state
+      const { label, hint, color, error } = this.props;
+      const { hasFocused } = this.state;
       return (
          <LabelAndInputContainer>
             <InputLabel error={error} color={color} hasFocused={hasFocused}>
@@ -168,8 +174,8 @@ class Input extends Component<InputProps> {
                {hint}
             </InputHint>
          </LabelAndInputContainer>
-      )
+      );
    }
 }
 
-export default Input
+export default Input;
