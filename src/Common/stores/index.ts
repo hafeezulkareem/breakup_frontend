@@ -1,21 +1,21 @@
 import { createContext, useContext } from "react";
 
-import { UserAPIs } from "../../Authentication/services/UserService/index.api";
-import { UserFixtures } from "../../Authentication/services/UserService/index.fixture";
-import UserStore from "../../Authentication/stores/UserStore";
+import { AuthAPIs } from "../../Authentication/services/AuthService/index.api";
+import { AuthFixtures } from "../../Authentication/services/AuthService/index.fixture";
+import AuthStore from "../../Authentication/stores/AuthStore";
 
 const useFixtures = false;
 
 function getUserAPIFixtures() {
    if (useFixtures) {
-      return new UserFixtures();
+      return new AuthFixtures();
    }
-   return new UserAPIs();
+   return new AuthAPIs();
 }
 
-const userStore = new UserStore(getUserAPIFixtures());
+const authStore = new AuthStore(getUserAPIFixtures());
 
-export const stores = { userStore };
+export const stores = { authStore };
 
 export const StoreContext = createContext(stores);
 

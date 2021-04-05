@@ -4,7 +4,7 @@ import { apiStatus } from "../../../Common/constants/APIConstants";
 import { getParsedErrorMessage } from "../../../Common/utils/APIUtils";
 import { setToken } from "../../../Common/utils/StorageUtils";
 
-import { UserService } from "../../services/UserService";
+import { AuthService } from "../../services/AuthService";
 import {
    SignInAPIRequest,
    SignInAPIResponse,
@@ -13,17 +13,17 @@ import {
 
 import { UserModel } from "../models/UserModel/UserModel";
 
-class UserStore {
-   userService: UserService;
+class AuthStore {
+   authService: AuthService;
    @observable signInAPIStatus!: number;
    @observable signInAPIError!: string;
    @observable signUpAPIStatus!: number;
    @observable signUpAPIError!: string;
    user!: null | UserModel;
 
-   constructor(userService: UserService) {
+   constructor(authService: AuthService) {
       makeObservable(this);
-      this.userService = userService;
+      this.authService = authService;
       this.init();
    }
 
@@ -66,7 +66,7 @@ class UserStore {
       onFailure: Function = (): void => {}
    ) {
       const { email, password } = data;
-      const signInAPIPromise = this.userService.signInAPI(data);
+      const signInAPIPromise = this.authService.signInAPI(data);
       this.setSignInAPIStatus(apiStatus.loading);
       await signInAPIPromise
          .then((data) => {
@@ -97,7 +97,7 @@ class UserStore {
       onSuccess: Function = (): void => {},
       onFailure: Function = (): void => {}
    ) {
-      const signUpAPIPromise = this.userService.signUpAPI(data);
+      const signUpAPIPromise = this.authService.signUpAPI(data);
       this.setSignUpAPIStatus(apiStatus.loading);
       await signUpAPIPromise
          .then((data) => {
@@ -117,4 +117,4 @@ class UserStore {
    }
 }
 
-export { UserStore };
+export { AuthStore };

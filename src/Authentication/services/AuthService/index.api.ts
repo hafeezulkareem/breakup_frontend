@@ -11,9 +11,9 @@ import {
 
 import { endpoints } from "../endpoints";
 
-import { UserService } from ".";
+import { AuthService } from ".";
 
-class UserAPIs implements UserService {
+class AuthAPIs implements AuthService {
    api: Record<string, any>;
 
    constructor() {
@@ -39,4 +39,4 @@ class UserAPIs implements UserService {
    }
 }
 
-export { UserAPIs };
+export { AuthAPIs };

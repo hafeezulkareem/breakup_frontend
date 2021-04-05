@@ -47,7 +47,7 @@ const SignUp = observer((props: SignUpProps) => {
    };
 
    const {
-      userStore: { signUpAPI, signUpAPIStatus },
+      authStore: { signUpAPI, signUpAPIStatus },
    } = useStores();
 
    const onSuccessSignUpAPI = () => {

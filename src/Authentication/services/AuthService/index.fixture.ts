@@ -1,10 +1,10 @@
-import { UserService } from ".";
+import { AuthService } from ".";
 
 import { resolveWithTimeOut } from "../../../Common/utils/TestUtils";
 
 import signInResponse from "../../fixtures/postSignInAPIResponse.json";
 
-class UserFixtures implements UserService {
+class AuthFixtures implements AuthService {
    signInAPI() {
       return resolveWithTimeOut(signInResponse);
    }
@@ -14,4 +14,4 @@ class UserFixtures implements UserService {
    }
 }
 
-export { UserFixtures };
+export { AuthFixtures };

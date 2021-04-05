@@ -37,7 +37,7 @@ const SignIn = observer((props: SignInProps) => {
    };
 
    const {
-      userStore: { signInAPI, signInAPIStatus },
+      authStore: { signInAPI, signInAPIStatus },
    } = useStores();
 
    const onFailureSignIn = (signInAPIError: string) => {

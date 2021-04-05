@@ -4,7 +4,7 @@ import {
    SignUpAPIRequest,
 } from "../../types";
 
-export interface UserService {
+export interface AuthService {
    signInAPI: (data: SignInAPIRequest) => Promise<SignInAPIResponse>;
 
    signUpAPI: (data: SignUpAPIRequest) => Promise<{}>;
