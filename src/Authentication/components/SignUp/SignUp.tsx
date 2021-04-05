@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
 import cogoToast from "cogo-toast";
+import { FcGenealogy } from "react-icons/fc";
 
 import Button from "../../../Common/components/Button";
 import { colors } from "../../../Common/themes/colors";
@@ -10,6 +11,7 @@ import { isFetching } from "../../../Common/utils/APIUtils";
 import {
    FormContainer,
    FormInput,
+   LogoContainer,
    SignInLink,
    SignInLinkContainer,
    SignUpPage,
@@ -88,6 +90,9 @@ const SignUp = observer((props: SignUpProps) => {
    return (
       <SignUpPage>
          <FormContainer onSubmit={signUp}>
+            <LogoContainer>
+               <FcGenealogy size={42} />
+            </LogoContainer>
             <TitleContainer>
                <Title>Sign up</Title>
             </TitleContainer>
