@@ -28,6 +28,8 @@ const AddProjectModal = observer((props) => {
    } = useStores();
 
    const closeModal = () => {
+      setTitle("");
+      setDescription("");
       updateAddProjectModalStatus(false);
    };
 
