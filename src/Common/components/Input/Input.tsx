@@ -25,8 +25,8 @@ interface InputProps {
    rows: number;
    startIcon: string;
    endIcon: string;
-   onChangeInput: (event: React.FormEvent<HTMLInputElement>) => void;
-   input: string;
+   onChange: (event: React.FormEvent<HTMLInputElement>) => void;
+   value: string;
    hint: string;
    type: string;
    placeholder: string;
@@ -52,8 +52,8 @@ class Input extends Component<InputProps> {
       startIcon: "",
       endIcon: "",
       placeholder: "Enter text",
-      onChangeInput: () => {},
-      input: "",
+      onChange: () => {},
+      value: "",
       hint: "",
       type: "text",
       className: "",
@@ -97,9 +97,9 @@ class Input extends Component<InputProps> {
    renderInputOrTextArea = (): ReactNode => {
       const {
          type,
-         input,
+         value,
          placeholder,
-         onChangeInput,
+         onChange,
          label,
          hint,
          size,
@@ -118,9 +118,9 @@ class Input extends Component<InputProps> {
       return multiline ? (
          <TextArea
             type={type}
-            value={input}
+            value={value}
             placeholder={placeholder}
-            onChange={onChangeInput}
+            onChange={onChange}
             size={size}
             shape={shape}
             color={color}
@@ -138,9 +138,9 @@ class Input extends Component<InputProps> {
       ) : (
          <TextInput
             type={type}
-            value={input}
+            value={value}
             placeholder={placeholder}
-            onChange={onChangeInput}
+            onChange={onChange}
             size={size}
             shape={shape}
             color={color}

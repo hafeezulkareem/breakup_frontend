@@ -6,6 +6,7 @@ import { SignUpRoute } from "./Authentication/routes/SignUpRoute";
 import { PageNotFound } from "./Common/components/PageNotFound";
 import { StoreContext, stores } from "./Common/stores";
 import { DashboardRoute } from "./Dashboard/routes/DashboardRoute";
+import { AddProjectModal } from "./Dashboard/components/AddProjectModal";
 
 function App() {
    return (
@@ -18,6 +19,7 @@ function App() {
                <Route path="*" component={PageNotFound} />
             </Switch>
          </Router>
+         <AddProjectModal />
       </StoreContext.Provider>
    );
 }
