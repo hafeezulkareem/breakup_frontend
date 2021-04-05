@@ -1,6 +1,6 @@
 import { create } from "apisauce";
 
-import { authNetworkCallWithAxios } from "../../../Common/utils/APIUtils";
+import { networkCallWithAxios } from "../../../Common/utils/APIUtils";
 import { apiMethods } from "../../../Common/constants/APIConstants";
 
 import { CreateProjectAPIRequest, CreateProjectAPIResponse } from "../../types";
@@ -19,11 +19,12 @@ class ProjectsAPIs implements ProjectsService {
    createProjectAPI(
       data: CreateProjectAPIRequest
    ): Promise<CreateProjectAPIResponse> {
-      return authNetworkCallWithAxios(
+      return networkCallWithAxios(
          this.api,
          endpoints.createProject,
          data,
-         apiMethods.post
+         apiMethods.post,
+         true
       );
    }
 }

@@ -6,53 +6,15 @@ export const networkCallWithAxios = async (
    api,
    endpoint: string,
    requestData,
-   type = apiMethods.post
+   type = apiMethods.post,
+   authorization = false
 ) => {
    try {
       let response;
       api.setHeader("Content-Type", "application/json; charset=UTF-8");
-      switch (type) {
-         case apiMethods.post:
-            response = await api.post(endpoint, { ...requestData });
-            if (response.ok === false) {
-               throw Error(JSON.stringify(response.data));
-            }
-            return response.data;
-         case apiMethods.get:
-            response = await api.get(endpoint);
-            if (response.ok === false) {
-               throw Error(JSON.stringify(response.data));
-            }
-            return response.data;
-         case apiMethods.patch:
-            response = await api.patch(endpoint, { ...requestData });
-            if (response.ok === false) {
-               throw Error(JSON.stringify(response.data));
-            }
-            return response.data;
-         case apiMethods.delete:
-            response = await api.delete(endpoint);
-            if (response.ok === false) {
-               throw Error(JSON.stringify(response.data));
-            }
-            return response.data;
-         default:
+      if (authorization) {
+         api.setHeader("Authorization", `Bearer ${getToken()}`);
       }
-   } catch (err) {
-      throw err;
-   }
-};
-
-export const authNetworkCallWithAxios = async (
-   api,
-   endpoint: string,
-   requestData,
-   type = apiMethods.post
-) => {
-   try {
-      let response;
-      api.setHeader("Content-Type", "application/json; charset=UTF-8");
-      api.setHeader("Authorization", `Bearer ${getToken()}`);
       switch (type) {
          case apiMethods.post:
             response = await api.post(endpoint, { ...requestData });
