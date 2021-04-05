@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { observer } from "mobx-react-lite";
 
 import Button from "../../../Common/components/Button";
 import { colors } from "../../../Common/themes/colors";
@@ -14,7 +15,7 @@ import {
    TitleContainer,
 } from "./styledComponents";
 
-const SignUp = (props) => {
+const SignUp = observer((props) => {
    const [name, setName] = useState("");
    const [email, setEmail] = useState("");
    const [password, setPassword] = useState("");
@@ -85,6 +86,6 @@ const SignUp = (props) => {
          </FormContainer>
       </SignUpPage>
    );
-};
+});
 
 export { SignUp };

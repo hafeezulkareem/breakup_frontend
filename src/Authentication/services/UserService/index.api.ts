@@ -17,7 +17,7 @@ class UserAPIs implements UserService {
    api: Record<string, any>;
 
    constructor() {
-      this.api = create({ baseURL: process.env.BASE_URL });
+      this.api = create({ baseURL: "http://localhost:8000/api" });
    }
 
    signInAPI(data: SignInAPIRequest): Promise<SignInAPIResponse> {

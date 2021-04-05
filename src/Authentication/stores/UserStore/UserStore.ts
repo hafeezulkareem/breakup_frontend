@@ -1,4 +1,4 @@
-import { action, observable } from "mobx";
+import { action, makeObservable, observable } from "mobx";
 
 import { apiStatus } from "../../../Common/constants/APIConstants";
 import { getParsedErrorMessage } from "../../../Common/utils/APIUtils";
@@ -18,6 +18,7 @@ class UserStore {
    user!: null | UserModel;
 
    constructor(userService: UserService) {
+      makeObservable(this);
       this.userService = userService;
       this.init();
    }
@@ -31,10 +32,10 @@ class UserStore {
       this.signUpAPIError = "";
    }
 
-   @action.bound
-   setSignInAPIStatus(status: number) {
+   @action
+   setSignInAPIStatus = (status: number) => {
       this.signInAPIStatus = status;
-   }
+   };
 
    @action.bound
    setSignInAPIError(error) {
@@ -72,7 +73,7 @@ class UserStore {
          .catch((err) => {
             this.setSignInAPIStatus(apiStatus.failed);
             this.setSignInAPIError(err);
-            onFailure();
+            onFailure(this.signInAPIError);
          });
    }
 
