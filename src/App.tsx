@@ -12,9 +12,9 @@ function App() {
       <StoreContext.Provider value={stores}>
          <Router>
             <Switch>
-               <Route path="/" component={SignInRoute} exact />
+               <Route path="/sign-in" component={SignInRoute} exact />
                <Route path="/sign-up" component={SignUpRoute} exact />
-               <Route path="/dashboard" component={DashboardRoute} exact />
+               <Route path="/" component={DashboardRoute} exact />
                <Route path="*" component={PageNotFound} />
             </Switch>
          </Router>
