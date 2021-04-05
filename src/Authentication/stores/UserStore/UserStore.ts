@@ -5,7 +5,11 @@ import { getParsedErrorMessage } from "../../../Common/utils/APIUtils";
 import { setToken } from "../../../Common/utils/StorageUtils";
 
 import { UserService } from "../../services/UserService";
-import { SignInAPIRequest, SignInAPIResponse } from "../../types";
+import {
+   SignInAPIRequest,
+   SignInAPIResponse,
+   SignUpAPIRequest,
+} from "../../types";
 
 import { UserModel } from "../models/UserModel/UserModel";
 
@@ -32,10 +36,10 @@ class UserStore {
       this.signUpAPIError = "";
    }
 
-   @action
-   setSignInAPIStatus = (status: number) => {
+   @action.bound
+   setSignInAPIStatus(status: number) {
       this.signInAPIStatus = status;
-   };
+   }
 
    @action.bound
    setSignInAPIError(error) {
@@ -74,6 +78,36 @@ class UserStore {
             this.setSignInAPIStatus(apiStatus.failed);
             this.setSignInAPIError(err);
             onFailure(this.signInAPIError);
+         });
+   }
+
+   @action.bound
+   setSignUpAPIStatus(status: number) {
+      this.signUpAPIStatus = status;
+   }
+
+   @action.bound
+   setSignUpAPIError(error) {
+      this.signUpAPIError = getParsedErrorMessage(error);
+   }
+
+   @action.bound
+   async signUpAPI(
+      data: SignUpAPIRequest,
+      onSuccess: Function = (): void => {},
+      onFailure: Function = (): void => {}
+   ) {
+      const signUpAPIPromise = this.userService.signUpAPI(data);
+      this.setSignUpAPIStatus(apiStatus.loading);
+      await signUpAPIPromise
+         .then((data) => {
+            this.setSignUpAPIStatus(apiStatus.success);
+            onSuccess();
+         })
+         .catch((err) => {
+            this.setSignUpAPIStatus(apiStatus.failed);
+            this.setSignUpAPIError(err);
+            onFailure(this.signUpAPIError);
          });
    }
 

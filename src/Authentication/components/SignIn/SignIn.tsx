@@ -40,7 +40,7 @@ const SignIn = observer((props: SignInProps) => {
       userStore: { signInAPI, signInAPIStatus },
    } = useStores();
 
-   const onFailureSignIn = (signInAPIError) => {
+   const onFailureSignIn = (signInAPIError: string) => {
       cogoToast.error(signInAPIError, {
          position: "bottom-center",
       });

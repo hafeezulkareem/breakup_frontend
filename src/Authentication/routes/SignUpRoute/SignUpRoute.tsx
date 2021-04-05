@@ -1,16 +1,30 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
-import { Redirect } from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
+import { History } from "history";
 
 import { isSignedIn } from "../../../Common/utils/AuthUtils";
 
 import { SignUp } from "../../components/SignUp";
 
-const SignUpRoute = observer((props) => {
+interface SignUpRouteProps {
+   history: History;
+}
+
+const SignUpRoute = observer((props: SignUpRouteProps) => {
+   const { history } = props;
+
    if (isSignedIn()) {
       return <Redirect to="/" />;
    }
-   return <SignUp />;
+
+   const goToSignInPage = () => {
+      history.replace("/sign-in");
+   };
+
+   return <SignUp goToSignInPage={goToSignInPage} />;
 });
 
-export { SignUpRoute };
+const SignUpRouteWithRouter = withRouter(SignUpRoute);
+
+export { SignUpRouteWithRouter };

@@ -1,3 +1,3 @@
-import { SignUpRoute } from "./SignUpRoute";
+import { SignUpRouteWithRouter as SignUpRoute } from "./SignUpRoute";
 
 export { SignUpRoute };

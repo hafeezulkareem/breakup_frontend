@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
+import cogoToast from "cogo-toast";
 
 import Button from "../../../Common/components/Button";
 import { colors } from "../../../Common/themes/colors";
+import { useStores } from "../../../Common/stores";
+import { isFetching } from "../../../Common/utils/APIUtils";
 
 import {
    FormContainer,
@@ -15,7 +18,13 @@ import {
    TitleContainer,
 } from "./styledComponents";
 
-const SignUp = observer((props) => {
+interface SignUpProps {
+   goToSignInPage: () => void;
+}
+
+const SignUp = observer((props: SignUpProps) => {
+   const { goToSignInPage } = props;
+
    const [name, setName] = useState("");
    const [email, setEmail] = useState("");
    const [password, setPassword] = useState("");
@@ -37,8 +46,43 @@ const SignUp = observer((props) => {
       setConfirmPassword(event.target.value);
    };
 
+   const {
+      userStore: { signUpAPI, signUpAPIStatus },
+   } = useStores();
+
+   const onSuccessSignUpAPI = () => {
+      cogoToast.success("Account created successfully", {
+         position: "bottom-center",
+      });
+      goToSignInPage();
+   };
+
+   const onFailureSignUpAPI = (signUpAPIError: string) => {
+      cogoToast.error(signUpAPIError, {
+         position: "bottom-center",
+      });
+   };
+
    const signUp = (event) => {
       event.preventDefault();
+
+      if (name && email && password && confirmPassword) {
+         if (password === confirmPassword) {
+            signUpAPI(
+               { name, email, password },
+               onSuccessSignUpAPI,
+               onFailureSignUpAPI
+            );
+         } else {
+            cogoToast.error("Password and Confirm password didn't match", {
+               position: "bottom-center",
+            });
+         }
+      } else {
+         cogoToast.error("Fill all the details", {
+            position: "bottom-center",
+         });
+      }
    };
 
    return (
@@ -71,13 +115,17 @@ const SignUp = observer((props) => {
             />
             <FormInput
                value={confirmPassword}
-               type={"confirmPassword"}
+               type={"password"}
                placeholder={"Confirm password"}
                onChange={onChangeConfirmPassword}
                startIcon={"password"}
                iconColor={colors.gray3}
             />
-            <SubmitButton color={Button.colors.primary} onClick={signUp}>
+            <SubmitButton
+               color={Button.colors.primary}
+               loading={isFetching(signUpAPIStatus)}
+               onClick={signUp}
+            >
                Create Account
             </SubmitButton>
             <SignInLinkContainer>
