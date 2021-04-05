@@ -1,6 +1,6 @@
 import { action, makeObservable, observable } from "mobx";
-import { apiStatus } from "../../../Common/constants/APIConstants";
 
+import { apiStatus } from "../../../Common/constants/APIConstants";
 import { getParsedErrorMessage } from "../../../Common/utils/APIUtils";
 
 import { ProjectsService } from "../../services/ProjectsService";
@@ -12,7 +12,7 @@ class ProjectsStore {
    projectsService: ProjectsService;
    @observable creatProjectAPIStatus!: number;
    @observable createProjectAPIError!: string;
-   miniProjects!: Array<MiniProjectModel>;
+   @observable miniProjects!: Array<MiniProjectModel>;
 
    constructor(projectsService: ProjectsService) {
       this.projectsService = projectsService;
@@ -22,6 +22,7 @@ class ProjectsStore {
 
    @action.bound
    init() {
+      this.miniProjects = [];
       this.creatProjectAPIStatus = 0;
       this.createProjectAPIError = "";
    }
@@ -50,7 +51,7 @@ class ProjectsStore {
    }
 
    @action.bound
-   async signUpAPI(
+   async createProjectAPI(
       data: CreateProjectAPIRequest,
       onSuccess: Function = (): void => {},
       onFailure: Function = (): void => {}

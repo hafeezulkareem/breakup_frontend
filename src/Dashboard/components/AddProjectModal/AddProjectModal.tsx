@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
 import Modal from "react-modal";
 import { IoIosCloseCircle } from "react-icons/io";
+import cogoToast from "cogo-toast";
 
 import { useStores } from "../../../Common/stores";
 import { colors } from "../../../Common/themes/colors";
@@ -18,6 +19,7 @@ import {
    TitleBar,
 } from "./styledComponents";
 import "./styles.css";
+import { isFetching } from "../../../Common/utils/APIUtils";
 
 const AddProjectModal = observer((props) => {
    const [title, setTitle] = useState("");
@@ -25,6 +27,7 @@ const AddProjectModal = observer((props) => {
 
    const {
       uiStore: { showAddProjectModal, updateAddProjectModalStatus },
+      projectsStore: { createProjectAPI, creatProjectAPIStatus },
    } = useStores();
 
    const closeModal = () => {
@@ -39,6 +42,29 @@ const AddProjectModal = observer((props) => {
 
    const onChangeDescription = (event) => {
       setDescription(event.target.value);
+   };
+
+   const onSuccessCreateProjectAPI = () => {
+      closeModal();
+      cogoToast.success("Project created successfully", {
+         position: "bottom-center",
+      });
+   };
+
+   const onFailureCreateProjectAPI = (createProjectAPIError: string) => {
+      cogoToast.error(createProjectAPIError, { position: "bottom-center" });
+   };
+
+   const createProject = () => {
+      if (title) {
+         createProjectAPI(
+            { title, description },
+            onSuccessCreateProjectAPI,
+            onFailureCreateProjectAPI
+         );
+      } else {
+         cogoToast.error("Title is required", { position: "bottom-center" });
+      }
    };
 
    return (
@@ -71,7 +97,12 @@ const AddProjectModal = observer((props) => {
                   value={description}
                   onChange={onChangeDescription}
                />
-               <AddProjectButton color={Button.colors.primary} startIcon="add">
+               <AddProjectButton
+                  color={Button.colors.primary}
+                  startIcon="add"
+                  onClick={createProject}
+                  loading={isFetching(creatProjectAPIStatus)}
+               >
                   Project
                </AddProjectButton>
             </ModalBodyContainer>
