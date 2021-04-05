@@ -9,6 +9,6 @@ export const DashboardContainer = styled.div`
 
 export const Container = styled.div`
    ${tw`
-      mt-75px
+      mt-75px py-24px px-44px
    `}
 `;
