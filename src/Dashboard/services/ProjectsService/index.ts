@@ -5,5 +5,3 @@ export interface ProjectsService {
       data: CreateProjectAPIRequest
    ) => Promise<CreateProjectAPIResponse>;
 }
-
-export { ProjectsService };
