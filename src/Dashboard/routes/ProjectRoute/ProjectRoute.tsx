@@ -8,6 +8,7 @@ import { useStores } from "../../../Common/stores";
 
 import { Header } from "../../components/Header";
 import { TitleAndNavigation } from "../../components/TitleAndNavigation";
+import { ProjectTitleBar } from "../../components/ProjectTitleBar";
 
 import { Container, ProjectPageContainer } from "./styledComponents";
 
@@ -46,7 +47,9 @@ const ProjectRoute = observer((props: ProjectRouteProps) => {
    return (
       <ProjectPageContainer>
          <Header titleAndNavigation={renderTitleAndNavigation} />
-         <Container>Project Details</Container>
+         <Container>
+            <ProjectTitleBar />
+         </Container>
       </ProjectPageContainer>
    );
 });
