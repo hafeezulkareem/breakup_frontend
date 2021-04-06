@@ -26,7 +26,7 @@ export const LogoContainer = styled.div``;
 
 export const FormContainer = styled.form`
    ${tw`
-        flex flex-col w-full md:w-1/5 border border-solid border-gray3 shadow rounded-16px py-36px px-32px
+        flex flex-col w-full md:w-1/5 border border-solid border-darkGray10 shadow rounded-16px py-36px px-32px
     `}
 `;
 
