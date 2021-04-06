@@ -37,7 +37,9 @@ const Projects = observer((props: ProjectsProps) => {
    } = useStores();
 
    useEffect(() => {
-      getProjectsAPI();
+      if (miniProjects.length === 0) {
+         getProjectsAPI();
+      }
    }, [getProjectsAPI, miniProjects]);
 
    const renderProjects = () => {
