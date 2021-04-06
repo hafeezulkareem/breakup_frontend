@@ -36,6 +36,15 @@ class ProjectsStore {
    }
 
    @action.bound
+   getProjectTitleWithId(id: string): string {
+      const project = this.miniProjects.find((project) => project.id === id);
+      if (project) {
+         return project.title;
+      }
+      return "";
+   }
+
+   @action.bound
    setCreateProjectAPIStatus(status: number) {
       this.creatProjectAPIStatus = status;
    }

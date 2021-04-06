@@ -20,3 +20,15 @@ export const Title = styled.span`
         text-xl font-semibold ml-8px
     `}
 `;
+
+export const LeftContainer = styled.div`
+   ${tw`
+        flex items-center
+    `}
+`;
+
+export const TitleAndNavigationContainer = styled.div`
+   ${tw`
+        ml-32px
+    `}
+`;

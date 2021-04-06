@@ -1,3 +1,3 @@
-import { ProjectRoute } from "./ProjectRoute";
+import { ProjectRouteWithRouter as ProjectRoute } from "./ProjectRoute";
 
 export { ProjectRoute };

@@ -1,23 +1,44 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { observer } from "mobx-react-lite";
 import { FcGenealogy } from "react-icons/fc";
 
 import {
    HeaderContainer,
+   LeftContainer,
    LogoContainer,
    Title,
    TitleAndLogoContainer,
+   TitleAndNavigationContainer,
 } from "./styledComponents";
 
-const Header = observer((props) => {
+interface HeaderProps {
+   titleAndNavigation?: () => ReactNode;
+}
+
+const Header = observer((props: HeaderProps) => {
+   const { titleAndNavigation } = props;
+   const renderTitleAndNavigation = (): ReactNode => {
+      if (titleAndNavigation) {
+         return (
+            <TitleAndNavigationContainer>
+               {titleAndNavigation()}
+            </TitleAndNavigationContainer>
+         );
+      }
+      return null;
+   };
+
    return (
       <HeaderContainer>
-         <TitleAndLogoContainer>
-            <LogoContainer>
-               <FcGenealogy size={42} />
-            </LogoContainer>
-            <Title>BreakUp</Title>
-         </TitleAndLogoContainer>
+         <LeftContainer>
+            <TitleAndLogoContainer>
+               <LogoContainer>
+                  <FcGenealogy size={42} />
+               </LogoContainer>
+               <Title>BreakUp</Title>
+            </TitleAndLogoContainer>
+            {renderTitleAndNavigation()}
+         </LeftContainer>
       </HeaderContainer>
    );
 });
