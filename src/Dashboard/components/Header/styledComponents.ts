@@ -3,6 +3,7 @@ import tw, { styled } from "twin.macro";
 export const HeaderContainer = styled.div`
    ${tw`
         flex items-center justify-between shadow px-24px fixed top-0 left-0 right-0
+        bg-white
     `}
    height: 75px;
 `;
