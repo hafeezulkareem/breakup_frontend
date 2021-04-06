@@ -20,7 +20,13 @@ import {
    RetryButton,
 } from "./styledComponents";
 
-const Projects = observer((props) => {
+interface ProjectsProps {
+   goToProject: (id: string) => void;
+}
+
+const Projects = observer((props: ProjectsProps) => {
+   const { goToProject } = props;
+
    const {
       projectsStore: {
          miniProjects,
@@ -65,7 +71,11 @@ const Projects = observer((props) => {
          </CenterContainer>
       ) : (
          miniProjects.map((project) => (
-            <Project key={project.id} project={project} />
+            <Project
+               key={project.id}
+               project={project}
+               goToProject={goToProject}
+            />
          ))
       );
    };

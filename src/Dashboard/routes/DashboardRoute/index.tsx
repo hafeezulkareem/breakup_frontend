@@ -1,3 +1,3 @@
-import { DashboardRoute } from "./DashboardRoute";
+import { DashboardRouteWithRouter as DashboardRoute } from "./DashboardRoute";
 
 export { DashboardRoute };

@@ -1,5 +1,6 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
+import { History } from "history";
 
 import { isSignedIn } from "../../../Common/utils/AuthUtils";
 
@@ -8,19 +9,31 @@ import { Projects } from "../../components/Projects";
 
 import { Container, DashboardContainer } from "./styledComponents";
 
-const DashboardRoute = (props) => {
+interface DashboardRouteProps {
+   history: History;
+}
+
+const DashboardRoute = (props: DashboardRouteProps) => {
+   const { history } = props;
+
    if (!isSignedIn()) {
       return <Redirect to="/sign-in" />;
    }
+
+   const goToProject = (id: string) => {
+      history.push(`/project/${id}`);
+   };
 
    return (
       <DashboardContainer>
          <Header />
          <Container>
-            <Projects />
+            <Projects goToProject={goToProject} />
          </Container>
       </DashboardContainer>
    );
 };
 
-export { DashboardRoute };
+const DashboardRouteWithRouter = withRouter(DashboardRoute);
+
+export { DashboardRouteWithRouter };

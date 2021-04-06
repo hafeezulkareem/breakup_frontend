@@ -15,15 +15,17 @@ import {
 
 interface ProjectProps {
    project: MiniProjectModel;
+   goToProject: (id: string) => void;
 }
 
 const Project = observer((props: ProjectProps) => {
    const {
-      project: { title, description },
+      project: { id, title, description },
+      goToProject,
    } = props;
 
    return (
-      <ProjectContainer>
+      <ProjectContainer onClick={() => goToProject(id)}>
          <ProjectTitle title={title}>
             {title.length > 25 ? title.slice(0, 25) + "..." : title}
          </ProjectTitle>
