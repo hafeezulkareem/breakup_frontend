@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import { ClipLoader } from "react-spinners";
 import { FcEmptyBattery } from "react-icons/fc";
@@ -20,20 +20,19 @@ import {
    RetryButton,
 } from "./styledComponents";
 
-interface ProjectsProps {
-   getProjects: () => void;
-}
-
-const Projects = observer((props: ProjectsProps) => {
-   const { getProjects } = props;
-
+const Projects = observer((props) => {
    const {
       projectsStore: {
          miniProjects,
+         getProjectsAPI,
          getProjectsAPIStatus,
          getProjectsAPIError,
       },
    } = useStores();
+
+   useEffect(() => {
+      getProjectsAPI();
+   });
 
    const renderProjects = () => {
       if (isFetching(getProjectsAPIStatus)) {
@@ -50,7 +49,10 @@ const Projects = observer((props: ProjectsProps) => {
                <GetProjectsErrorMessage>
                   {getProjectsAPIError}
                </GetProjectsErrorMessage>
-               <RetryButton color={Button.colors.primary} onClick={getProjects}>
+               <RetryButton
+                  color={Button.colors.primary}
+                  onClick={getProjectsAPI}
+               >
                   Retry
                </RetryButton>
             </CenterContainer>
