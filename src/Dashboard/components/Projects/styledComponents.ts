@@ -10,8 +10,12 @@ export const ProjectsPage = styled.div`
 
 export const ProjectsContainer = styled.div`
    ${tw`
-        flex mt-16px
+        grid mt-16px
     `}
+   ${({ singleCol }) =>
+      singleCol
+         ? tw`grid-cols-1`
+         : tw`grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-min`}
    min-height: calc(100vh - 179px);
 `;
 
@@ -21,10 +25,7 @@ export const CenterContainer = styled.div`
     `}
 `;
 
-export const GetProjectsErrorMessage = styled.span`
-   ${tw`
-    `}
-`;
+export const GetProjectsErrorMessage = styled.span``;
 
 export const RetryButton = styled(Button)`
    ${tw`

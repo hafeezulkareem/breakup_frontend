@@ -6,8 +6,10 @@ import { FcEmptyBattery } from "react-icons/fc";
 import { useStores } from "../../../Common/stores";
 import { colors } from "../../../Common/themes/colors";
 import { isFailed, isFetching } from "../../../Common/utils/APIUtils";
+import Button from "../../../Common/components/Button";
 
 import { ProjectsTitleBar } from "../ProjectsTitleBar";
+import { Project } from "../Project";
 
 import {
    CenterContainer,
@@ -17,7 +19,6 @@ import {
    ProjectsPage,
    RetryButton,
 } from "./styledComponents";
-import Button from "../../../Common/components/Button";
 
 interface ProjectsProps {
    getProjects: () => void;
@@ -61,14 +62,24 @@ const Projects = observer((props: ProjectsProps) => {
             <FcEmptyBattery size={32} />
          </CenterContainer>
       ) : (
-         miniProjects.map((project) => <span>{project.title}</span>)
+         miniProjects.map((project) => (
+            <Project key={project.id} project={project} />
+         ))
       );
    };
 
    return (
       <ProjectsPage>
          <ProjectsTitleBar />
-         <ProjectsContainer>{renderProjects()}</ProjectsContainer>
+         <ProjectsContainer
+            singleCol={
+               isFetching(getProjectsAPIStatus) ||
+               isFailed(getProjectsAPIStatus) ||
+               miniProjects.length === 0
+            }
+         >
+            {renderProjects()}
+         </ProjectsContainer>
       </ProjectsPage>
    );
 });
