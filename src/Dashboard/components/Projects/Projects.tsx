@@ -45,7 +45,7 @@ const Projects = observer((props) => {
 
       if (isFailed(getProjectsAPIStatus)) {
          return (
-            <CenterContainer>
+            <CenterContainer col>
                <GetProjectsErrorMessage>
                   {getProjectsAPIError}
                </GetProjectsErrorMessage>

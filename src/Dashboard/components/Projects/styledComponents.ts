@@ -21,8 +21,9 @@ export const ProjectsContainer = styled.div`
 
 export const CenterContainer = styled.div`
    ${tw`
-        flex items-center self-center mx-auto
+        flex items-center justify-center self-center mx-auto
     `}
+   ${({ col }) => (col ? tw`flex-col` : tw`flex-row`)}
 `;
 
 export const GetProjectsErrorMessage = styled.span``;
