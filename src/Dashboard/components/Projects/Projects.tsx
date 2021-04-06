@@ -32,7 +32,7 @@ const Projects = observer((props) => {
 
    useEffect(() => {
       getProjectsAPI();
-   });
+   }, [getProjectsAPI, miniProjects]);
 
    const renderProjects = () => {
       if (isFetching(getProjectsAPIStatus)) {
