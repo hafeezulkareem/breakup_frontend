@@ -8,7 +8,7 @@ export const StagesContainer = styled.div`
 
 export const StageContainer = styled.div`
    ${tw`
-        pr-16px
+        flex flex-col pr-16px
     `}
    min-width: calc(25% - 12px);
 `;
