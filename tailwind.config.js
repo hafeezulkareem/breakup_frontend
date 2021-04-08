@@ -156,6 +156,7 @@ module.exports = {
          none: "0px",
          "4px": "4px",
          "6px": "6px",
+         "8px": "8px",
          "16px": "16px",
          "50px": "50px",
          sm: "0.125rem",

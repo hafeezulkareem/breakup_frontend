@@ -5,14 +5,15 @@ import { History } from "history";
 
 import { isSignedIn } from "../../../Common/utils/AuthUtils";
 import { useStores } from "../../../Common/stores";
+import { UserModel } from "../../../Authentication/stores/models/UserModel";
 
 import { Header } from "../../components/Header";
 import { TitleAndNavigation } from "../../components/TitleAndNavigation";
 import { ProjectTitleBar } from "../../components/ProjectTitleBar";
 import { ProjectDetails } from "../../components/ProjectDetails";
+import { ProjectStages } from "../../components/ProjectStages";
 
 import { Container, ProjectPageContainer } from "./styledComponents";
-import { UserModel } from "../../../Authentication/stores/models/UserModel";
 
 interface ProjectRouteProps {
    history: History;
@@ -77,6 +78,7 @@ const ProjectRoute = observer((props: ProjectRouteProps) => {
                   }),
                ]}
             />
+            <ProjectStages />
          </Container>
       </ProjectPageContainer>
    );
