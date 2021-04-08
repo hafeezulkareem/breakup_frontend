@@ -4,7 +4,7 @@ import Button from "../../../Common/components/Button";
 
 export const ProjectStageContainer = styled.div`
    ${tw`
-        flex flex-col flex-grow px-12px shadow-sm rounded-8px
+        flex flex-col flex-grow px-12px shadow-sm rounded-8px pb-12px
     `}
 `;
 
@@ -29,4 +29,10 @@ export const StageOptionsMenuButton = styled(Button)`
             bg-transparent
         `}
    }
+`;
+
+export const BlockContainer = styled.div`
+   ${tw`
+        mt-12px
+    `}
 `;
