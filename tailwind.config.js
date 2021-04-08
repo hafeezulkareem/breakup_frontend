@@ -3,6 +3,7 @@ const customColors = {
    blueWhale: "#1C313A",
    burntOrange10: "rgba(211, 84, 0, .1)",
    burntOrange: "#D35400",
+   catskillWhite: "#F6F8FB",
    concrete: "#F2F2F2",
    darkGray10: "rgba(174, 174, 174, .1)",
    darkGray: "#AEAEAE",
