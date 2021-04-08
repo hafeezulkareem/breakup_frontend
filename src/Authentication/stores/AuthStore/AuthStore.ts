@@ -11,7 +11,7 @@ import {
    SignUpAPIRequest,
 } from "../../types";
 
-import { UserModel } from "../models/UserModel/UserModel";
+import { UserModel } from "../models/UserModel";
 
 class AuthStore {
    authService: AuthService;
