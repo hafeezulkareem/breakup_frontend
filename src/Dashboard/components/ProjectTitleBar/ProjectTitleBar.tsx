@@ -12,13 +12,19 @@ import {
    TitleBarContainer,
 } from "./styledComponents";
 
-const ProjectTitleBar = observer((props) => {
+interface ProjectTitleBarProps {
+   showProjectDetails: () => void;
+}
+
+const ProjectTitleBar = observer((props: ProjectTitleBarProps) => {
+   const { showProjectDetails } = props;
+
    return (
       <TitleBarContainer>
          <AddMemberButton color={Button.colors.primary}>
             <TiUserAdd size={18} />
          </AddMemberButton>
-         <ProjectMenuButton>
+         <ProjectMenuButton onClick={showProjectDetails}>
             <CgMenuGridR />
             <MenuButtonText>Menu</MenuButtonText>
          </ProjectMenuButton>

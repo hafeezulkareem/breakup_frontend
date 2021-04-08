@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { Redirect, withRouter } from "react-router-dom";
 import { History } from "history";
@@ -9,8 +9,10 @@ import { useStores } from "../../../Common/stores";
 import { Header } from "../../components/Header";
 import { TitleAndNavigation } from "../../components/TitleAndNavigation";
 import { ProjectTitleBar } from "../../components/ProjectTitleBar";
+import { ProjectDetails } from "../../components/ProjectDetails";
 
 import { Container, ProjectPageContainer } from "./styledComponents";
+import { UserModel } from "../../../Authentication/stores/models/UserModel";
 
 interface ProjectRouteProps {
    history: History;
@@ -24,6 +26,10 @@ const ProjectRoute = observer((props: ProjectRouteProps) => {
          params: { id },
       },
    } = props;
+
+   const [shouldShowProjectsDetails, setShouldShowProjectDetails] = useState(
+      false
+   );
 
    const {
       projectsStore: { getProjectTitleWithId },
@@ -44,11 +50,33 @@ const ProjectRoute = observer((props: ProjectRouteProps) => {
       return <TitleAndNavigation goToProjects={goToProjects} />;
    };
 
+   const showProjectDetails = () => {
+      setShouldShowProjectDetails(true);
+   };
+
+   const hideProjectDetails = () => {
+      setShouldShowProjectDetails(false);
+   };
+
    return (
       <ProjectPageContainer>
          <Header titleAndNavigation={renderTitleAndNavigation} />
          <Container>
-            <ProjectTitleBar />
+            <ProjectTitleBar showProjectDetails={showProjectDetails} />
+            <ProjectDetails
+               shouldShow={shouldShowProjectsDetails}
+               hideProjectDetails={hideProjectDetails}
+               title="Sample123"
+               description="New Sample"
+               members={[
+                  new UserModel({
+                     id: "123456789",
+                     name: "Hafeez",
+                     email: "hafeezulkareem@gmail.com",
+                     password: "12345",
+                  }),
+               ]}
+            />
          </Container>
       </ProjectPageContainer>
    );
