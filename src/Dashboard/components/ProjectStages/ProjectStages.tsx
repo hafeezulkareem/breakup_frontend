@@ -1,10 +1,18 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
 
-import { StagesContainer } from "./styledComponents";
+import { AddStage } from "../AddStage";
+
+import { StageContainer, StagesContainer } from "./styledComponents";
 
 const ProjectStages = observer((props) => {
-   return <StagesContainer>Project Stages</StagesContainer>;
+   return (
+      <StagesContainer>
+         <StageContainer>
+            <AddStage />
+         </StageContainer>
+      </StagesContainer>
+   );
 });
 
 export { ProjectStages };
