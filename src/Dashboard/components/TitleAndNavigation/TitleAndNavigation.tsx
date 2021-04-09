@@ -2,7 +2,6 @@ import React from "react";
 import { observer } from "mobx-react-lite";
 
 import Button from "../../../Common/components/Button";
-import { useStores } from "../../../Common/stores";
 
 import {
    AllProjectsButton,
@@ -12,15 +11,12 @@ import {
 } from "./styledComponents";
 
 interface TitleAndNavigationProps {
+   projectTitle: string;
    goToProjects: () => void;
 }
 
 const TitleAndNavigation = observer((props: TitleAndNavigationProps) => {
-   const { goToProjects } = props;
-
-   const {
-      uiStore: { projectTitle },
-   } = useStores();
+   const { goToProjects, projectTitle } = props;
 
    return (
       <Container>

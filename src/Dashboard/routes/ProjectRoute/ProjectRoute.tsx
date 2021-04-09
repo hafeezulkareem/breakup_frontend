@@ -34,13 +34,11 @@ const ProjectRoute = observer((props: ProjectRouteProps) => {
 
    const {
       projectsStore: {
-         getProjectTitleWithId,
          getProjectDetailsAPI,
          getProjectDetailsAPIStatus,
          getProjectDetailsAPIError,
          projectDetails,
       },
-      uiStore: { updateProjectTitle },
    } = useStores();
 
    if (!isSignedIn()) {
@@ -48,10 +46,8 @@ const ProjectRoute = observer((props: ProjectRouteProps) => {
    }
 
    useEffect(() => {
-      if (projectDetails === null) {
-         getProjectDetails();
-      }
-   });
+      getProjectDetails();
+   }, []);
 
    const getProjectDetails = () => {
       getProjectDetailsAPI(id);
@@ -61,10 +57,15 @@ const ProjectRoute = observer((props: ProjectRouteProps) => {
       history.push("/");
    };
 
-   updateProjectTitle(getProjectTitleWithId(id));
-
    const renderTitleAndNavigation = (): ReactNode => {
-      return <TitleAndNavigation goToProjects={goToProjects} />;
+      return (
+         <TitleAndNavigation
+            goToProjects={goToProjects}
+            projectTitle={
+               projectDetails ? projectDetails.projectBasicDetails.title : ""
+            }
+         />
+      );
    };
 
    const showProjectDetails = () => {
@@ -74,13 +75,6 @@ const ProjectRoute = observer((props: ProjectRouteProps) => {
    const hideProjectDetails = () => {
       setShouldShowProjectDetails(false);
    };
-
-   if (projectDetails) {
-      const {
-         projectBasicDetails: { title },
-      } = projectDetails;
-      updateProjectTitle(title);
-   }
 
    return (
       <ProjectPageContainer>
