@@ -30,7 +30,7 @@ export const GetProjectsErrorMessage = styled.span``;
 
 export const RetryButton = styled(Button)`
    ${tw`
-        bg-royalBlue
+        bg-royalBlue mt-16px
     `}
 `;
 
