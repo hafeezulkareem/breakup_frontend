@@ -31,3 +31,7 @@ export interface GetProjectDetailsAPIResponse {
 export interface CreateStageAPIRequest {
    name: string;
 }
+
+export interface CreateTaskAPIRequest {
+   title: string;
+}

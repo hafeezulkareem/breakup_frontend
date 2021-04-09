@@ -7,6 +7,8 @@ import { ProjectsAPIs } from "../../Dashboard/services/ProjectsService/index.api
 import { ProjectsFixtures } from "../../Dashboard/services/ProjectsService/index.fixture";
 import { StagesAPIs } from "../../Dashboard/services/StagesService/index.api";
 import { StagesFixtures } from "../../Dashboard/services/StagesService/index.fixture";
+import { TasksAPIs } from "../../Dashboard/services/TasksService/index.api";
+import { TasksFixture } from "../../Dashboard/services/TasksService/index.fixture";
 import { ProjectsStore } from "../../Dashboard/stores/ProjectsStore";
 import { StagesStore } from "../../Dashboard/stores/StagesStore";
 import { TasksStore } from "../../Dashboard/stores/TasksStore";
@@ -35,9 +37,16 @@ function getStagesFixtures() {
    return new StagesAPIs();
 }
 
+function getTasksFixtures() {
+   if (useFixtures) {
+      return new TasksFixture();
+   }
+   return new TasksAPIs();
+}
+
 const authStore = new AuthStore(getUserAPIFixtures());
 const uiStore = new UIStore();
-const tasksStore = new TasksStore();
+const tasksStore = new TasksStore(getTasksFixtures());
 const stagesStore = new StagesStore(getStagesFixtures(), tasksStore);
 const projectsStore = new ProjectsStore(getProjectsFixtures(), stagesStore);
 
