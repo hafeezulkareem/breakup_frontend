@@ -5,6 +5,7 @@ import { ClipLoader } from "react-spinners";
 import { isFailed, isFetching } from "../../../Common/utils/APIUtils";
 import Button from "../../../Common/components/Button";
 import { colors } from "../../../Common/themes/colors";
+import { useStores } from "../../../Common/stores";
 
 import { AddStage } from "../AddStage";
 import { ProjectStage } from "../ProjectStage";
@@ -21,7 +22,6 @@ interface ProjectStagesProps {
    getProjectDetails: () => void;
    getProjectDetailsAPIStatus: number;
    getProjectDetailsAPIError: string;
-   stages: Array<any>;
 }
 
 const ProjectStages = observer((props: ProjectStagesProps) => {
@@ -29,8 +29,11 @@ const ProjectStages = observer((props: ProjectStagesProps) => {
       getProjectDetails,
       getProjectDetailsAPIStatus,
       getProjectDetailsAPIError,
-      stages,
    } = props;
+
+   const {
+      stagesStore: { stages },
+   } = useStores();
 
    const renderProject = () => {
       if (isFetching(getProjectDetailsAPIStatus)) {
@@ -59,8 +62,8 @@ const ProjectStages = observer((props: ProjectStagesProps) => {
       return (
          <>
             {stages.map((stage) => (
-               <StageContainer>
-                  <ProjectStage />
+               <StageContainer key={stage.id}>
+                  <ProjectStage stage={stage} />
                </StageContainer>
             ))}
             <StageContainer>

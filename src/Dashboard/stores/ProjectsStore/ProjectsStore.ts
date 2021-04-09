@@ -13,6 +13,7 @@ import {
 
 import { MiniProjectModel } from "../models/MiniProjectModel";
 import { ProjectDetailsModel } from "../models/ProjectDetailsModel";
+import { StagesStore } from "../StagesStore";
 
 class ProjectsStore {
    projectsService: ProjectsService;
@@ -24,9 +25,11 @@ class ProjectsStore {
    @observable getProjectDetailsAPIStatus!: number;
    @observable getProjectDetailsAPIError!: string;
    @observable projectDetails!: ProjectDetailsModel | null;
+   stagesStore: StagesStore;
 
-   constructor(projectsService: ProjectsService) {
+   constructor(projectsService: ProjectsService, stagesStore: StagesStore) {
       this.projectsService = projectsService;
+      this.stagesStore = stagesStore;
       makeObservable(this);
       this.init();
    }
@@ -164,13 +167,13 @@ class ProjectsStore {
             admin_name: adminName,
             stages,
          } = response;
+         this.stagesStore.setProjectIdAndStages(id, stages);
          this.projectDetails = new ProjectDetailsModel({
             id,
             title,
             description,
             adminId,
             adminName,
-            stages,
          });
       }
    }

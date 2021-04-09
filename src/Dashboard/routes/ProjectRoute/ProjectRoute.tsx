@@ -99,7 +99,6 @@ const ProjectRoute = observer((props: ProjectRouteProps) => {
                getProjectDetails={getProjectDetails}
                getProjectDetailsAPIStatus={getProjectDetailsAPIStatus}
                getProjectDetailsAPIError={getProjectDetailsAPIError}
-               stages={projectDetails ? projectDetails.stages : []}
             />
          </Container>
       </ProjectPageContainer>

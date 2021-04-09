@@ -6,6 +6,7 @@ import AuthStore from "../../Authentication/stores/AuthStore";
 import { ProjectsAPIs } from "../../Dashboard/services/ProjectsService/index.api";
 import { ProjectsFixtures } from "../../Dashboard/services/ProjectsService/index.fixture";
 import { ProjectsStore } from "../../Dashboard/stores/ProjectsStore";
+import { StagesStore } from "../../Dashboard/stores/StagesStore";
 import { UIStore } from "../../Dashboard/stores/UIStore";
 
 const useFixtures = false;
@@ -26,9 +27,10 @@ function getProjectsFixtures() {
 
 const authStore = new AuthStore(getUserAPIFixtures());
 const uiStore = new UIStore();
-const projectsStore = new ProjectsStore(getProjectsFixtures());
+const stagesStore = new StagesStore();
+const projectsStore = new ProjectsStore(getProjectsFixtures(), stagesStore);
 
-export const stores = { authStore, uiStore, projectsStore };
+export const stores = { authStore, uiStore, projectsStore, stagesStore };
 
 export const StoreContext = createContext(stores);
 

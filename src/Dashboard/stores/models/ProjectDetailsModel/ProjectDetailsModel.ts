@@ -3,12 +3,11 @@ import { makeObservable, observable } from "mobx";
 import { MiniProjectModel } from "../MiniProjectModel";
 
 class ProjectDetailsModel {
-   projectBasicDetails: MiniProjectModel;
+   @observable projectBasicDetails: MiniProjectModel;
    adminId: string;
    adminName: string;
-   @observable stages: Array<string>;
 
-   constructor({ id, title, description, adminId, adminName, stages }) {
+   constructor({ id, title, description, adminId, adminName }) {
       makeObservable(this);
       this.projectBasicDetails = new MiniProjectModel({
          id,
@@ -17,7 +16,6 @@ class ProjectDetailsModel {
       });
       this.adminId = adminId;
       this.adminName = adminName;
-      this.stages = stages;
    }
 }
 
