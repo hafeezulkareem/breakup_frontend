@@ -1,6 +1,7 @@
 import {
    CreateProjectAPIRequest,
    CreateProjectAPIResponse,
+   GetProjectDetailsAPIResponse,
    GetProjectsAPIResponse,
 } from "../../types";
 
@@ -10,4 +11,6 @@ export interface ProjectsService {
    ) => Promise<CreateProjectAPIResponse>;
 
    getProjectsAPI: () => Promise<Array<GetProjectsAPIResponse>>;
+
+   getProjectDetailsAPI: (id: string) => Promise<GetProjectDetailsAPIResponse>;
 }

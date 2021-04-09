@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { Redirect, withRouter } from "react-router-dom";
 import { History } from "history";
@@ -33,13 +33,29 @@ const ProjectRoute = observer((props: ProjectRouteProps) => {
    );
 
    const {
-      projectsStore: { getProjectTitleWithId },
+      projectsStore: {
+         getProjectTitleWithId,
+         getProjectDetailsAPI,
+         getProjectDetailsAPIStatus,
+         getProjectDetailsAPIError,
+         projectDetails,
+      },
       uiStore: { updateProjectTitle },
    } = useStores();
 
    if (!isSignedIn()) {
       return <Redirect to="/sign-in" />;
    }
+
+   useEffect(() => {
+      if (projectDetails === null) {
+         getProjectDetails();
+      }
+   });
+
+   const getProjectDetails = () => {
+      getProjectDetailsAPI(id);
+   };
 
    const goToProjects = () => {
       history.push("/");
@@ -58,6 +74,13 @@ const ProjectRoute = observer((props: ProjectRouteProps) => {
    const hideProjectDetails = () => {
       setShouldShowProjectDetails(false);
    };
+
+   if (projectDetails) {
+      const {
+         projectBasicDetails: { title },
+      } = projectDetails;
+      updateProjectTitle(title);
+   }
 
    return (
       <ProjectPageContainer>
@@ -78,7 +101,12 @@ const ProjectRoute = observer((props: ProjectRouteProps) => {
                   }),
                ]}
             />
-            <ProjectStages />
+            <ProjectStages
+               getProjectDetails={getProjectDetails}
+               getProjectDetailsAPIStatus={getProjectDetailsAPIStatus}
+               getProjectDetailsAPIError={getProjectDetailsAPIError}
+               stages={projectDetails ? projectDetails.stages : []}
+            />
          </Container>
       </ProjectPageContainer>
    );

@@ -6,6 +6,7 @@ import { apiMethods } from "../../../Common/constants/APIConstants";
 import {
    CreateProjectAPIRequest,
    CreateProjectAPIResponse,
+   GetProjectDetailsAPIResponse,
    GetProjectsAPIResponse,
 } from "../../types";
 
@@ -25,7 +26,7 @@ class ProjectsAPIs implements ProjectsService {
    ): Promise<CreateProjectAPIResponse> {
       return networkCallWithAxios(
          this.api,
-         endpoints.createProject,
+         endpoints.project,
          data,
          apiMethods.post,
          true
@@ -36,6 +37,16 @@ class ProjectsAPIs implements ProjectsService {
       return networkCallWithAxios(
          this.api,
          endpoints.getProjects,
+         {},
+         apiMethods.get,
+         true
+      );
+   }
+
+   getProjectDetailsAPI(id: string): Promise<GetProjectDetailsAPIResponse> {
+      return networkCallWithAxios(
+         this.api,
+         `${endpoints.project}${id}/`,
          {},
          apiMethods.get,
          true

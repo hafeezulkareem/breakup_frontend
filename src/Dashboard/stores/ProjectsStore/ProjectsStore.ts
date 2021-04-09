@@ -7,10 +7,12 @@ import { ProjectsService } from "../../services/ProjectsService";
 import {
    CreateProjectAPIRequest,
    CreateProjectAPIResponse,
+   GetProjectDetailsAPIResponse,
    GetProjectsAPIResponse,
 } from "../../types";
 
 import { MiniProjectModel } from "../models/MiniProjectModel";
+import { ProjectDetailsModel } from "../models/ProjectDetailsModel";
 
 class ProjectsStore {
    projectsService: ProjectsService;
@@ -19,6 +21,9 @@ class ProjectsStore {
    @observable miniProjects!: Array<MiniProjectModel>;
    @observable getProjectsAPIStatus!: number;
    @observable getProjectsAPIError!: string;
+   @observable getProjectDetailsAPIStatus!: number;
+   @observable getProjectDetailsAPIError!: string;
+   @observable projectDetails!: ProjectDetailsModel | null;
 
    constructor(projectsService: ProjectsService) {
       this.projectsService = projectsService;
@@ -33,6 +38,9 @@ class ProjectsStore {
       this.createProjectAPIError = "";
       this.getProjectsAPIStatus = 0;
       this.getProjectsAPIError = "";
+      this.projectDetails = null;
+      this.getProjectDetailsAPIStatus = 0;
+      this.getProjectDetailsAPIError = "";
    }
 
    @action.bound
@@ -73,10 +81,12 @@ class ProjectsStore {
       onSuccess: Function = (): void => {},
       onFailure: Function = (): void => {}
    ) {
-      const signUpAPIPromise = this.projectsService.createProjectAPI(data);
+      const createProjectAPIPromise = this.projectsService.createProjectAPI(
+         data
+      );
       this.setCreateProjectAPIStatus(apiStatus.loading);
       const { title, description } = data;
-      await signUpAPIPromise
+      await createProjectAPIPromise
          .then((data) => {
             this.setCreateProjectAPIStatus(apiStatus.success);
             this.setCreateProjectAPIResponse(data, title, description);
@@ -116,9 +126,9 @@ class ProjectsStore {
       onSuccess: Function = (): void => {},
       onFailure: Function = (): void => {}
    ) {
-      const signUpAPIPromise = this.projectsService.getProjectsAPI();
+      const getProjectsAPIPromise = this.projectsService.getProjectsAPI();
       this.setGetProjectsAPIStatus(apiStatus.loading);
-      await signUpAPIPromise
+      await getProjectsAPIPromise
          .then((data) => {
             this.setGetProjectsAPIStatus(apiStatus.success);
             this.setGetProjectsAPIResponse(data);
@@ -127,6 +137,63 @@ class ProjectsStore {
          .catch((err) => {
             this.setGetProjectsAPIStatus(apiStatus.failed);
             this.setGetProjectsAPIError(err);
+            onFailure();
+         });
+   }
+
+   @action.bound
+   setGetProjectDetailsAPIStatus(status: number) {
+      this.getProjectDetailsAPIStatus = status;
+   }
+
+   @action.bound
+   setGetProjectDetailsAPIError(error) {
+      this.getProjectDetailsAPIError = getParsedErrorMessage(error);
+   }
+
+   @action.bound
+   setGetProjectDetailsAPIResponse(
+      response: GetProjectDetailsAPIResponse | null
+   ) {
+      if (response) {
+         const {
+            id,
+            title,
+            description,
+            admin_id: adminId,
+            admin_name: adminName,
+            stages,
+         } = response;
+         this.projectDetails = new ProjectDetailsModel({
+            id,
+            title,
+            description,
+            adminId,
+            adminName,
+            stages,
+         });
+      }
+   }
+
+   @action.bound
+   async getProjectDetailsAPI(
+      id: string,
+      onSuccess: Function = (): void => {},
+      onFailure: Function = (): void => {}
+   ) {
+      const getProjectDetailsAPIPromise = this.projectsService.getProjectDetailsAPI(
+         id
+      );
+      this.setGetProjectDetailsAPIStatus(apiStatus.loading);
+      await getProjectDetailsAPIPromise
+         .then((data) => {
+            this.setGetProjectDetailsAPIStatus(apiStatus.success);
+            this.setGetProjectDetailsAPIResponse(data);
+            onSuccess();
+         })
+         .catch((err) => {
+            this.setGetProjectDetailsAPIStatus(apiStatus.failed);
+            this.setGetProjectDetailsAPIError(err);
             onFailure();
          });
    }

@@ -1,4 +1,5 @@
 import tw, { styled } from "twin.macro";
+import Button from "../../../Common/components/Button";
 
 export const StagesContainer = styled.div`
    ${tw`
@@ -12,4 +13,22 @@ export const StageContainer = styled.div`
     `}
    min-width: calc(25% - 12px);
    max-width: calc(25% - 12px);
+`;
+
+export const CenterContainer = styled.div`
+   ${tw`
+        flex flex-col self-center mx-auto
+    `}
+`;
+
+export const GetProjectsErrorMessage = styled.span`
+   ${tw`
+
+    `}
+`;
+
+export const RetryButton = styled(Button)`
+   ${tw`
+        bg-royalBlue
+    `}
 `;

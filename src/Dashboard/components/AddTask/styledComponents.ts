@@ -40,7 +40,7 @@ export const ButtonsContainer = styled.div`
 
 export const AddButton = styled(Button)`
    ${tw`
-
+        bg-royalBlue
     `}
 `;
 

@@ -1,0 +1,8 @@
+{
+   "id": "12345678976543",
+   "title": "Sample Project",
+   "description": "Hell, this is sample project description",
+   "admin_id": "3487654345678",
+   "admin_name": "Hafeezul Kareem Shaik",
+   "stages": ["Stage 1", "Stage 2", "Stage 3", "Stage 4", "Stage 5"]
+}
