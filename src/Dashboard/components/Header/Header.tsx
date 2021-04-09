@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { FcGenealogy } from "react-icons/fc";
 
 import MenuDropdown from "../../../Common/components/MenuDropdown/MenuDropdown";
-import UserModel from "../../../Authentication/stores/models/UserModel/ index";
+import { UserModel } from "../../../Authentication/stores/models/UserModel";
 
 import {
 	HeaderContainer,
