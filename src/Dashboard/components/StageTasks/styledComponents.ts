@@ -4,5 +4,5 @@ export const TasksContainer = styled.div`
    ${tw`
         flex flex-col
     `}
-   ${({ margin }) => (margin ? tw`mt-16px` : tw``)}
+   ${({ margin }) => (margin ? tw`mt-12px` : tw``)}
 `;
