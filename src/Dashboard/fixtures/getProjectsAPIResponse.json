@@ -2,17 +2,11 @@
    {
       "id": "345678987654",
       "title": "Testing project",
-      "description": "Sample description for testing project",
-      "admin_id": "45670987654334",
-      "admin_name": "Hafeezul Kareem Shaik",
-      "stages": []
+      "description": "Sample description for testing project"
    },
    {
       "id": "45678909876543",
       "title": "Testing project with long title for UI testing as it go out of the box sometimes",
-      "description": "I'm not interested in writing description for this project",
-      "admin_id": "45670987654334",
-      "admin_name": "Hafeezul Kareem Shaik",
-      "stages": []
+      "description": "I'm not interested in writing description for this project"
    }
 ]
