@@ -35,6 +35,11 @@ class TasksStore {
          this.tasks[id] = taskModels;
       });
    }
+
+   @action.bound
+   addNewStage(stageId: string) {
+      this.tasks[stageId] = [];
+   }
 }
 
 export { TasksStore };

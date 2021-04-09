@@ -19,7 +19,7 @@ class StagesAPIs implements StagesService {
    createStageAPI(projectId: string, data: CreateStageAPIRequest) {
       return networkCallWithAxios(
          this.api,
-         `${endpoints.project}${projectId}/${endpoints.stage}`,
+         `${endpoints.project}${projectId}${endpoints.stage}`,
          data,
          apiMethods.post,
          true

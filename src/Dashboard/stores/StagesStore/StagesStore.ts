@@ -61,6 +61,7 @@ class StagesStore {
       if (response) {
          const { id } = response;
          this.stages.push(new StageModel({ id, name }));
+         this.tasksStore.addNewStage(id);
       }
    }
 

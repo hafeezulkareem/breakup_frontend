@@ -77,13 +77,15 @@ const ProjectRoute = observer((props: ProjectRouteProps) => {
    };
 
    let projectTitle = "",
-      projectDescription = "";
+      projectDescription = "",
+      projectId = "";
    if (projectDetails) {
       const {
-         projectBasicDetails: { title, description },
+         projectBasicDetails: { id, title, description },
       } = projectDetails;
       projectTitle = title;
       projectDescription = description;
+      projectId = id;
    }
 
    return (
@@ -109,6 +111,7 @@ const ProjectRoute = observer((props: ProjectRouteProps) => {
                getProjectDetails={getProjectDetails}
                getProjectDetailsAPIStatus={getProjectDetailsAPIStatus}
                getProjectDetailsAPIError={getProjectDetailsAPIError}
+               projectId={projectId}
             />
          </Container>
       </ProjectPageContainer>

@@ -22,6 +22,7 @@ interface ProjectStagesProps {
    getProjectDetails: () => void;
    getProjectDetailsAPIStatus: number;
    getProjectDetailsAPIError: string;
+   projectId: string;
 }
 
 const ProjectStages = observer((props: ProjectStagesProps) => {
@@ -29,6 +30,7 @@ const ProjectStages = observer((props: ProjectStagesProps) => {
       getProjectDetails,
       getProjectDetailsAPIStatus,
       getProjectDetailsAPIError,
+      projectId,
    } = props;
 
    const {
@@ -67,7 +69,7 @@ const ProjectStages = observer((props: ProjectStagesProps) => {
                </StageContainer>
             ))}
             <StageContainer>
-               <AddStage />
+               <AddStage projectId={projectId} />
             </StageContainer>
          </>
       );
