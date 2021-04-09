@@ -16,12 +16,14 @@ import {
 } from "./styledComponents";
 
 interface ProjectStageProps {
+   projectId: string;
    stage: StageModel;
 }
 
 const ProjectStage = observer((props: ProjectStageProps) => {
    const {
       stage: { id, name },
+      projectId,
    } = props;
 
    return (
@@ -34,7 +36,7 @@ const ProjectStage = observer((props: ProjectStageProps) => {
          </StageTitleBar>
          <StageTasks stageId={id} />
          <BlockContainer>
-            <AddTask />
+            <AddTask projectId={projectId} stageId={id} />
          </BlockContainer>
       </ProjectStageContainer>
    );

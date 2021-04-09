@@ -65,7 +65,7 @@ const ProjectStages = observer((props: ProjectStagesProps) => {
          <>
             {stages.map((stage) => (
                <StageContainer key={stage.id}>
-                  <ProjectStage stage={stage} />
+                  <ProjectStage stage={stage} projectId={projectId} />
                </StageContainer>
             ))}
             <StageContainer>

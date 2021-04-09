@@ -14,7 +14,7 @@ import { TaskModel } from "../models/TaskModel";
 
 class TasksStore {
    projectId!: string;
-   tasks!:
+   @observable tasks!:
       | {
            stageId: Array<TaskModel>;
         }
@@ -74,6 +74,7 @@ class TasksStore {
       if (response) {
          const { id } = response;
          this.tasks[stageId].push(new TaskModel({ id, title }));
+         console.log("TASKS", this.tasks[stageId]);
       }
    }
 
