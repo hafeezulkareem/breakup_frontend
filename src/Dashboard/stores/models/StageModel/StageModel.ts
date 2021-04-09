@@ -4,7 +4,7 @@ class StageModel {
    id: string;
    @observable name: string;
 
-   constructor({ id, name, tasks }) {
+   constructor({ id, name }) {
       makeObservable(this);
       this.id = id;
       this.name = name;

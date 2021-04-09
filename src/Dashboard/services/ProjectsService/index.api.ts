@@ -5,7 +5,7 @@ import { apiMethods } from "../../../Common/constants/APIConstants";
 
 import {
    CreateProjectAPIRequest,
-   CreateProjectAPIResponse,
+   CreateAPIResponse,
    GetProjectDetailsAPIResponse,
    GetProjectsAPIResponse,
 } from "../../types";
@@ -21,9 +21,7 @@ class ProjectsAPIs implements ProjectsService {
       this.api = create({ baseURL: "http://localhost:8000/api" });
    }
 
-   createProjectAPI(
-      data: CreateProjectAPIRequest
-   ): Promise<CreateProjectAPIResponse> {
+   createProjectAPI(data: CreateProjectAPIRequest): Promise<CreateAPIResponse> {
       return networkCallWithAxios(
          this.api,
          endpoints.project,

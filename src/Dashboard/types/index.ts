@@ -3,7 +3,7 @@ export interface CreateProjectAPIRequest {
    description: string;
 }
 
-export interface CreateProjectAPIResponse {
+export interface CreateAPIResponse {
    id: string;
 }
 
@@ -26,4 +26,8 @@ export interface GetProjectDetailsAPIResponse {
    admin_id: string;
    admin_name: string;
    stages: Array<StageResponse>;
+}
+
+export interface CreateStageAPIRequest {
+   name: string;
 }

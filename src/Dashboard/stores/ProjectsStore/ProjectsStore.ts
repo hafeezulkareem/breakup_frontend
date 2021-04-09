@@ -6,7 +6,7 @@ import { getParsedErrorMessage } from "../../../Common/utils/APIUtils";
 import { ProjectsService } from "../../services/ProjectsService";
 import {
    CreateProjectAPIRequest,
-   CreateProjectAPIResponse,
+   CreateAPIResponse,
    GetProjectDetailsAPIResponse,
    GetProjectsAPIResponse,
 } from "../../types";
@@ -67,7 +67,7 @@ class ProjectsStore {
 
    @action.bound
    setCreateProjectAPIResponse(
-      response: CreateProjectAPIResponse | null,
+      response: CreateAPIResponse | null,
       title: string,
       description: string
    ) {
