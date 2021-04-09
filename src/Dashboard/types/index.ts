@@ -1,6 +1,6 @@
 export interface CreateProjectAPIRequest {
    title: string;
-   description?: string;
+   description: string;
 }
 
 export interface CreateProjectAPIResponse {

@@ -69,7 +69,7 @@ class ProjectsStore {
    setCreateProjectAPIResponse(
       response: CreateProjectAPIResponse | null,
       title: string,
-      description: string | undefined
+      description: string
    ) {
       if (response) {
          const { id } = response;

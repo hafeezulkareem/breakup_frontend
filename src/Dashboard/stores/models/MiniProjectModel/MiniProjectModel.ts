@@ -3,7 +3,7 @@ import { observable } from "mobx";
 class MiniProjectModel {
    id: string;
    @observable title: string;
-   @observable description: string | undefined;
+   @observable description: string;
 
    constructor({
       id,
@@ -12,7 +12,7 @@ class MiniProjectModel {
    }: {
       id: string;
       title: string;
-      description: string | undefined;
+      description: string;
    }) {
       this.id = id;
       this.title = title;

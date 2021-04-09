@@ -76,6 +76,16 @@ const ProjectRoute = observer((props: ProjectRouteProps) => {
       setShouldShowProjectDetails(false);
    };
 
+   let projectTitle = "",
+      projectDescription = "";
+   if (projectDetails) {
+      const {
+         projectBasicDetails: { title, description },
+      } = projectDetails;
+      projectTitle = title;
+      projectDescription = description;
+   }
+
    return (
       <ProjectPageContainer>
          <Header titleAndNavigation={renderTitleAndNavigation} />
@@ -84,8 +94,8 @@ const ProjectRoute = observer((props: ProjectRouteProps) => {
             <ProjectDetails
                shouldShow={shouldShowProjectsDetails}
                hideProjectDetails={hideProjectDetails}
-               title="Sample123"
-               description="New Sample"
+               title={projectTitle}
+               description={projectDescription}
                members={[
                   new UserModel({
                      id: "123456789",
