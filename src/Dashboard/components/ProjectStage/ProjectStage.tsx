@@ -4,8 +4,8 @@ import { RiMoreFill } from "react-icons/ri";
 
 import { StageModel } from "../../stores/models/StageModel";
 
-import { Task } from "../Task";
 import { AddTask } from "../AddTask";
+import { StageTasks } from "../StageTasks";
 
 import {
    BlockContainer,
@@ -21,7 +21,7 @@ interface ProjectStageProps {
 
 const ProjectStage = observer((props: ProjectStageProps) => {
    const {
-      stage: { name },
+      stage: { id, name },
    } = props;
 
    return (
@@ -32,9 +32,7 @@ const ProjectStage = observer((props: ProjectStageProps) => {
                <RiMoreFill size={18} />
             </StageOptionsMenuButton>
          </StageTitleBar>
-         <BlockContainer>
-            <Task />
-         </BlockContainer>
+         <StageTasks stageId={id} />
          <BlockContainer>
             <AddTask />
          </BlockContainer>
