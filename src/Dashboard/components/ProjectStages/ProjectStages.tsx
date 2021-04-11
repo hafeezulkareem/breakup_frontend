@@ -40,27 +40,16 @@ const Stages = observer((props: StagesProps) => {
    } = useStores();
 
    return (
-      <Droppable droppableId="project" direction="horizontal" type="COLUMN">
-         {(provided) => (
-            <StagesContainer
-               ref={provided.innerRef}
-               {...provided.droppableProps}
-            >
-               {stages.map((stage: StageModel, index: number) => (
-                  <ProjectStage
-                     stage={stage}
-                     projectId={projectId}
-                     index={index}
-                     key={stage.id}
-                  />
-               ))}
-               {provided.placeholder}
-               <StageContainer>
-                  <AddStage projectId={projectId} />
-               </StageContainer>
-            </StagesContainer>
-         )}
-      </Droppable>
+      <>
+         {stages.map((stage: StageModel, index: number) => (
+            <ProjectStage
+               stage={stage}
+               projectId={projectId}
+               index={index}
+               key={stage.id}
+            />
+         ))}
+      </>
    );
 });
 
@@ -96,7 +85,22 @@ const ProjectStages = observer((props: ProjectStagesProps) => {
          );
       }
 
-      return <Stages projectId={projectId} />;
+      return (
+         <Droppable droppableId="project" direction="horizontal" type="COLUMN">
+            {(provided) => (
+               <StagesContainer
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+               >
+                  <Stages projectId={projectId} />
+                  <StageContainer>
+                     <AddStage projectId={projectId} />
+                  </StageContainer>
+                  {provided.placeholder}
+               </StagesContainer>
+            )}
+         </Droppable>
+      );
    };
 
    return (

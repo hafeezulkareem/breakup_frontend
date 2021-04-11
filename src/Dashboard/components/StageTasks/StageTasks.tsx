@@ -14,6 +14,22 @@ interface StageTasksProps {
    stageId: string;
 }
 
+interface TasksProps {
+   tasks: Array<TaskModel>;
+}
+
+const Tasks = observer((props: TasksProps) => {
+   const { tasks } = props;
+
+   return (
+      <>
+         {tasks.map((task: TaskModel, index: number) => (
+            <Task task={task} index={index} key={task.id} />
+         ))}
+      </>
+   );
+});
+
 const StageTasks = observer((props: StageTasksProps) => {
    const { stageId } = props;
 
@@ -31,9 +47,7 @@ const StageTasks = observer((props: StageTasksProps) => {
                {...provided.droppableProps}
                margin={stageTasks.length > 0 ? true : false}
             >
-               {stageTasks.map((task: TaskModel, index: number) => (
-                  <Task task={task} index={index} key={task.id} />
-               ))}
+               <Tasks tasks={stageTasks} />
                {provided.placeholder}
             </TasksContainer>
          )}
