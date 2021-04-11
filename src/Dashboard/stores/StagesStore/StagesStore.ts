@@ -47,6 +47,15 @@ class StagesStore {
    }
 
    @action.bound
+   reorderStage(id: string, sourceIndex: number, destinationIndex: number) {
+      if (sourceIndex < this.stages.length) {
+         const stage = this.stages[sourceIndex];
+         this.stages = this.stages.filter((stage) => stage.id !== id);
+         this.stages.splice(destinationIndex, 0, stage);
+      }
+   }
+
+   @action.bound
    setCreateStageAPIStatus(status: number) {
       this.createStageAPIStatus = status;
    }

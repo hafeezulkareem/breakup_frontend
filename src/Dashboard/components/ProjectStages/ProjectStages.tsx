@@ -61,6 +61,10 @@ const ProjectStages = observer((props: ProjectStagesProps) => {
       projectId,
    } = props;
 
+   const {
+      stagesStore: { reorderStage },
+   } = useStores();
+
    const renderStages = () => {
       if (isFetching(getProjectDetailsAPIStatus)) {
          return (
@@ -103,8 +107,22 @@ const ProjectStages = observer((props: ProjectStagesProps) => {
       );
    };
 
+   const handleDragEnd = (result) => {
+      const {
+         type,
+         draggableId,
+         source: { index: sourceIndex },
+         destination: { index: destinationIndex },
+      } = result;
+      if (type === "COLUMN") {
+         if (sourceIndex !== destinationIndex) {
+            reorderStage(draggableId, sourceIndex, destinationIndex);
+         }
+      }
+   };
+
    return (
-      <DragDropContext onDragEnd={(result) => console.log(result)}>
+      <DragDropContext onDragEnd={handleDragEnd}>
          {renderStages()}
       </DragDropContext>
    );
