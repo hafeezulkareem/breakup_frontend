@@ -69,7 +69,7 @@ const ProjectStages = observer((props: ProjectStagesProps) => {
                direction="horizontal"
                type="COLUMN"
             >
-               {(provided) => (
+               {(provided, snapshot) => (
                   <StagesContainer
                      ref={provided.innerRef}
                      {...provided.droppableProps}

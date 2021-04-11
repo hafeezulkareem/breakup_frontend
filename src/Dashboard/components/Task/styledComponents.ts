@@ -29,6 +29,9 @@ export const TaskContainer = styled.div`
             inline
           `}
       }
+      ${tw`
+         bg-porcelain
+      `}
    }
 `;
 
