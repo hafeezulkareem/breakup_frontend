@@ -74,7 +74,6 @@ class TasksStore {
       if (response) {
          const { id } = response;
          this.tasks[stageId].push(new TaskModel({ id, title }));
-         console.log("TASKS", this.tasks[stageId]);
       }
    }
 
