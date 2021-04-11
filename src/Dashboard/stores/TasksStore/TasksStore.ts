@@ -56,6 +56,22 @@ class TasksStore {
    }
 
    @action.bound
+   reorderTask(
+      id: string,
+      sourceIndex: number,
+      sourceStageId: string,
+      destinationIndex: number,
+      destinationStageId: string
+   ) {
+      const tasks = this.tasks[sourceStageId];
+      if (sourceIndex < tasks.length) {
+         const task = tasks[sourceIndex];
+         this.tasks[sourceStageId] = tasks.filter((task) => task.id !== id);
+         this.tasks[destinationStageId].splice(destinationIndex, 0, task);
+      }
+   }
+
+   @action.bound
    setCreateTaskAPIStatus(status: number) {
       this.createTaskAPIStatus = status;
    }

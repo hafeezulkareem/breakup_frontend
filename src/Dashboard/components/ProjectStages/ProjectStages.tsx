@@ -63,6 +63,7 @@ const ProjectStages = observer((props: ProjectStagesProps) => {
 
    const {
       stagesStore: { reorderStage },
+      tasksStore: { reorderTask },
    } = useStores();
 
    const renderStages = () => {
@@ -108,15 +109,29 @@ const ProjectStages = observer((props: ProjectStagesProps) => {
    };
 
    const handleDragEnd = (result) => {
+      if (!result) {
+         return;
+      }
+
       const {
          type,
          draggableId,
-         source: { index: sourceIndex },
-         destination: { index: destinationIndex },
+         source: { index: sourceIndex, droppableId: sourceId },
+         destination: { index: destinationIndex, droppableId: destinationId },
       } = result;
       if (type === "COLUMN") {
          if (sourceIndex !== destinationIndex) {
             reorderStage(draggableId, sourceIndex, destinationIndex);
+         }
+      } else {
+         if (sourceId !== destinationId || sourceIndex !== destinationIndex) {
+            reorderTask(
+               draggableId,
+               sourceIndex,
+               sourceId,
+               destinationIndex,
+               destinationId
+            );
          }
       }
    };
