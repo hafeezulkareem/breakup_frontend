@@ -13,7 +13,6 @@ export const StageContainer = styled.div`
         flex flex-col pr-16px
     `}
    min-width: calc(25% - 12px);
-   max-width: calc(25% - 12px);
 `;
 
 export const CenterContainer = styled(StagesContainer)`

@@ -1,12 +1,14 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
 import { ClipLoader } from "react-spinners";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
 import { isFailed, isFetching } from "../../../Common/utils/APIUtils";
 import Button from "../../../Common/components/Button";
 import { colors } from "../../../Common/themes/colors";
 import { useStores } from "../../../Common/stores";
+
+import { StageModel } from "../../stores/models/StageModel";
 
 import { AddStage } from "../AddStage";
 import { ProjectStage } from "../ProjectStage";
@@ -26,6 +28,42 @@ interface ProjectStagesProps {
    projectId: string;
 }
 
+interface StagesProps {
+   projectId: string;
+}
+
+const Stages = observer((props: StagesProps) => {
+   const { projectId } = props;
+
+   const {
+      stagesStore: { stages },
+   } = useStores();
+
+   return (
+      <Droppable droppableId="project" direction="horizontal" type="COLUMN">
+         {(provided) => (
+            <StagesContainer
+               ref={provided.innerRef}
+               {...provided.droppableProps}
+            >
+               {stages.map((stage: StageModel, index: number) => (
+                  <ProjectStage
+                     stage={stage}
+                     projectId={projectId}
+                     index={index}
+                     key={stage.id}
+                  />
+               ))}
+               {provided.placeholder}
+               <StageContainer>
+                  <AddStage projectId={projectId} />
+               </StageContainer>
+            </StagesContainer>
+         )}
+      </Droppable>
+   );
+});
+
 const ProjectStages = observer((props: ProjectStagesProps) => {
    const {
       getProjectDetails,
@@ -34,11 +72,7 @@ const ProjectStages = observer((props: ProjectStagesProps) => {
       projectId,
    } = props;
 
-   const {
-      stagesStore: { stages },
-   } = useStores();
-
-   const renderProject = () => {
+   const renderStages = () => {
       if (isFetching(getProjectDetailsAPIStatus)) {
          return (
             <CenterContainer>
@@ -62,50 +96,14 @@ const ProjectStages = observer((props: ProjectStagesProps) => {
          );
       }
 
-      return (
-         <>
-            <Droppable
-               droppableId="project"
-               direction="horizontal"
-               type="COLUMN"
-            >
-               {(provided, snapshot) => (
-                  <StagesContainer
-                     ref={provided.innerRef}
-                     {...provided.droppableProps}
-                  >
-                     {stages.map((stage, index) => (
-                        <Draggable
-                           draggableId={stage.id}
-                           index={index}
-                           key={stage.id}
-                        >
-                           {(provided) => (
-                              <StageContainer
-                                 ref={provided.innerRef}
-                                 {...provided.draggableProps}
-                                 {...provided.dragHandleProps}
-                              >
-                                 <ProjectStage
-                                    stage={stage}
-                                    projectId={projectId}
-                                 />
-                              </StageContainer>
-                           )}
-                        </Draggable>
-                     ))}
-                     {provided.placeholder}
-                     <StageContainer>
-                        <AddStage projectId={projectId} />
-                     </StageContainer>
-                  </StagesContainer>
-               )}
-            </Droppable>
-         </>
-      );
+      return <Stages projectId={projectId} />;
    };
 
-   return <DragDropContext>{renderProject()}</DragDropContext>;
+   return (
+      <DragDropContext onDragEnd={(result) => console.log(result)}>
+         {renderStages()}
+      </DragDropContext>
+   );
 });
 
 export { ProjectStages };

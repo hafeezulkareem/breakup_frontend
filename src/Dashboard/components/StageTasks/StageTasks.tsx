@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
-import { Droppable, Draggable } from "react-beautiful-dnd";
+import { Droppable } from "react-beautiful-dnd";
 
 import { useStores } from "../../../Common/stores";
 
@@ -8,7 +8,7 @@ import { TaskModel } from "../../stores/models/TaskModel";
 
 import { Task } from "../Task";
 
-import { TasksContainer, TaskContainer } from "./styledComponents";
+import { TasksContainer } from "./styledComponents";
 
 interface StageTasksProps {
    stageId: string;
@@ -31,18 +31,8 @@ const StageTasks = observer((props: StageTasksProps) => {
                {...provided.droppableProps}
                margin={stageTasks.length > 0 ? true : false}
             >
-               {stageTasks.map((task: TaskModel, index) => (
-                  <Draggable draggableId={task.id} index={index} key={task.id}>
-                     {(provided) => (
-                        <TaskContainer
-                           ref={provided.innerRef}
-                           {...provided.draggableProps}
-                           {...provided.dragHandleProps}
-                        >
-                           <Task task={task} />
-                        </TaskContainer>
-                     )}
-                  </Draggable>
+               {stageTasks.map((task: TaskModel, index: number) => (
+                  <Task task={task} index={index} key={task.id} />
                ))}
                {provided.placeholder}
             </TasksContainer>

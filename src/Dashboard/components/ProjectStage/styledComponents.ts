@@ -4,8 +4,10 @@ import Button from "../../../Common/components/Button";
 
 export const ProjectStageContainer = styled.div`
    ${tw`
-        flex flex-col flex-grow px-12px shadow-sm rounded-8px pb-12px
+        mr-16px px-12px shadow-sm rounded-8px pb-12px bg-darkGray10
     `}
+   height: fit-content;
+   min-width: calc(25% - 36px);
 `;
 
 export const StageTitleBar = styled.div`
