@@ -26,7 +26,7 @@ export const TaskContainer = styled.div`
    &:hover {
       ${EditButton} {
          ${tw`
-            block
+            inline
           `}
       }
    }

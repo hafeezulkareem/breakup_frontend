@@ -20,6 +20,7 @@ const customColors = {
    persianBlue: "#0039CB",
    persianRed: "#D32F2F",
    pictonBlue: "#3486EE",
+   porcelain: "#F5F6F7",
    royalBlue10: "rgba(41, 98, 255, .1)",
    royalBlue: "#2962FF",
    salem: "#1E824C",

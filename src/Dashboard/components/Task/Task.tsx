@@ -28,7 +28,7 @@ const Task = observer((props: TaskProps) => {
                <TaskTitle>{title}</TaskTitle>
             </TaskTitleContainer>
             <EditButton disableShadow>
-               <GrEdit size={16} />
+               <GrEdit size={14} />
             </EditButton>
          </TitleBar>
       </TaskContainer>
