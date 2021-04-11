@@ -97,10 +97,10 @@ const ProjectStages = observer((props: ProjectStagesProps) => {
                   {...provided.droppableProps}
                >
                   <Stages projectId={projectId} />
+                  {provided.placeholder}
                   <StageContainer>
                      <AddStage projectId={projectId} />
                   </StageContainer>
-                  {provided.placeholder}
                </StagesContainer>
             )}
          </Droppable>
