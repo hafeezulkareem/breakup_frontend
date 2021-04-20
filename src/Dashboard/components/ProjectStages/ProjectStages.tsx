@@ -109,7 +109,7 @@ const ProjectStages = observer((props: ProjectStagesProps) => {
    };
 
    const handleDragEnd = (result) => {
-      if (!result) {
+      if (!result || !result.destination) {
          return;
       }
 
