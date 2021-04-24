@@ -63,7 +63,7 @@ const ProjectStages = observer((props: ProjectStagesProps) => {
    } = props;
 
    const {
-      stagesStore: { reorderStage },
+      stagesStore: { reorderStage, reorderStageAPI, reorderStageAPIError },
       tasksStore: { reorderTask, reorderTaskAPI, reorderTaskAPIError },
    } = useStores();
 
@@ -113,6 +113,10 @@ const ProjectStages = observer((props: ProjectStagesProps) => {
       cogoToast.error(reorderTaskAPIError, { position: "bottom-center" });
    };
 
+   const onFailureStageReorderAPI = () => {
+      cogoToast.error(reorderStageAPIError, { position: "bottom-center" });
+   };
+
    const handleDragEnd = (result) => {
       if (!result || !result.destination) {
          return;
@@ -127,6 +131,12 @@ const ProjectStages = observer((props: ProjectStagesProps) => {
       if (type === "COLUMN") {
          if (sourceIndex !== destinationIndex) {
             reorderStage(draggableId, sourceIndex, destinationIndex);
+            reorderStageAPI(
+               draggableId,
+               { order: destinationIndex },
+               () => {},
+               onFailureStageReorderAPI
+            );
          }
       } else {
          if (sourceId !== destinationId || sourceIndex !== destinationIndex) {

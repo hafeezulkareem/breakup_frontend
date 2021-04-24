@@ -36,8 +36,11 @@ export interface CreateTaskAPIRequest {
    title: string;
 }
 
-export interface ReorderTaskAPIRequest {
+export interface ReorderAPIRequest {
+   order: number;
+}
+
+export interface ReorderTaskAPIRequest extends ReorderAPIRequest {
    source_id: string;
    destination_id: string;
-   order: number;
 }

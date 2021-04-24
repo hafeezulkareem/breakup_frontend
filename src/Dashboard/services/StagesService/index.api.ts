@@ -3,7 +3,7 @@ import { create } from "apisauce";
 import { networkCallWithAxios } from "../../../Common/utils/APIUtils";
 import { apiMethods } from "../../../Common/constants/APIConstants";
 
-import { CreateStageAPIRequest } from "../../types";
+import { CreateStageAPIRequest, ReorderAPIRequest } from "../../types";
 
 import { endpoints } from "../endpoints";
 
@@ -22,6 +22,20 @@ class StagesAPIs implements StagesService {
          `${endpoints.project}${projectId}${endpoints.stage}`,
          data,
          apiMethods.post,
+         true
+      );
+   }
+
+   reorderStageAPI(
+      projectId: string,
+      stageId: string,
+      data: ReorderAPIRequest
+   ) {
+      return networkCallWithAxios(
+         this.api,
+         `${endpoints.project}${projectId}${endpoints.stage}${stageId}/order/update/`,
+         data,
+         apiMethods.put,
          true
       );
    }
