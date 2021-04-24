@@ -34,6 +34,12 @@ export const networkCallWithAxios = async (
                throw Error(JSON.stringify(response.data));
             }
             return response.data;
+         case apiMethods.put:
+            response = await api.put(endpoint, { ...requestData });
+            if (response.ok === false) {
+               throw Error(JSON.stringify(response.data));
+            }
+            return response.data;
          case apiMethods.delete:
             response = await api.delete(endpoint);
             if (response.ok === false) {
