@@ -3,6 +3,7 @@ export const apiMethods = {
    get: "GET",
    patch: "PATCH",
    delete: "DELETE",
+   put: "PUT",
 };
 
 export const apiStatus = {
