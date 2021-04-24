@@ -7,6 +7,7 @@ import { TasksService } from "../../services/TasksService";
 import {
    CreateAPIResponse,
    CreateTaskAPIRequest,
+   ReorderTaskAPIRequest,
    StageResponse,
 } from "../../types";
 
@@ -22,6 +23,8 @@ class TasksStore {
    tasksService: TasksService;
    @observable createTaskAPIStatus!: number;
    @observable createTaskAPIError!: string;
+   @observable reorderTaskAPIStatus!: number;
+   @observable reorderTaskAPIError!: string;
 
    constructor(tasksService) {
       makeObservable(this);
@@ -35,6 +38,8 @@ class TasksStore {
       this.tasks = {};
       this.createTaskAPIStatus = 0;
       this.createTaskAPIError = "";
+      this.reorderTaskAPIStatus = 0;
+      this.reorderTaskAPIError = "";
    }
 
    @action.bound
@@ -115,6 +120,40 @@ class TasksStore {
          .catch((err) => {
             this.setCreateTaskAPIStatus(apiStatus.failed);
             this.setCreateTaskAPIError(err);
+            onFailure();
+         });
+   }
+
+   @action.bound
+   setReorderTaskAPIStatus(status: number) {
+      this.reorderTaskAPIStatus = status;
+   }
+
+   @action.bound
+   setReorderTaskAPIError(error) {
+      this.reorderTaskAPIError = getParsedErrorMessage(error);
+   }
+
+   @action.bound
+   async reorderTaskAPI(
+      stageId: string,
+      data: ReorderTaskAPIRequest,
+      onSuccess: Function = (): void => {},
+      onFailure: Function = (): void => {}
+   ) {
+      const createTaskAPIPromise = this.tasksService.reorderTaskAPI(
+         stageId,
+         data
+      );
+      this.setReorderTaskAPIStatus(apiStatus.loading);
+      await createTaskAPIPromise
+         .then((data) => {
+            this.setReorderTaskAPIStatus(apiStatus.success);
+            onSuccess();
+         })
+         .catch((err) => {
+            this.setReorderTaskAPIStatus(apiStatus.failed);
+            this.setReorderTaskAPIError(err);
             onFailure();
          });
    }

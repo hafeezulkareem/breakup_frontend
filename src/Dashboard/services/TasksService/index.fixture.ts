@@ -8,6 +8,10 @@ class TasksFixture implements TasksService {
    createTaskAPI() {
       return resolveWithTimeOut(createTaskAPIResponse);
    }
+
+   reorderTaskAPI() {
+      return resolveWithTimeOut({});
+   }
 }
 
 export { TasksFixture };

@@ -2,6 +2,7 @@ import React from "react";
 import { observer } from "mobx-react-lite";
 import { ClipLoader } from "react-spinners";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import cogoToast from "cogo-toast";
 
 import { isFailed, isFetching } from "../../../Common/utils/APIUtils";
 import Button from "../../../Common/components/Button";
@@ -63,7 +64,7 @@ const ProjectStages = observer((props: ProjectStagesProps) => {
 
    const {
       stagesStore: { reorderStage },
-      tasksStore: { reorderTask },
+      tasksStore: { reorderTask, reorderTaskAPI, reorderTaskAPIError },
    } = useStores();
 
    const renderStages = () => {
@@ -108,6 +109,10 @@ const ProjectStages = observer((props: ProjectStagesProps) => {
       );
    };
 
+   const onFailureTaskReorderAPI = () => {
+      cogoToast.error(reorderTaskAPIError, { position: "bottom-center" });
+   };
+
    const handleDragEnd = (result) => {
       if (!result || !result.destination) {
          return;
@@ -131,6 +136,16 @@ const ProjectStages = observer((props: ProjectStagesProps) => {
                sourceId,
                destinationIndex,
                destinationId
+            );
+            reorderTaskAPI(
+               draggableId,
+               {
+                  source_id: sourceId,
+                  destination_id: destinationId,
+                  order: destinationIndex,
+               },
+               () => {},
+               onFailureTaskReorderAPI
             );
          }
       }

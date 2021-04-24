@@ -3,7 +3,7 @@ import { create } from "apisauce";
 import { networkCallWithAxios } from "../../../Common/utils/APIUtils";
 import { apiMethods } from "../../../Common/constants/APIConstants";
 
-import { CreateTaskAPIRequest } from "../../types";
+import { CreateTaskAPIRequest, ReorderTaskAPIRequest } from "../../types";
 
 import { endpoints } from "../endpoints";
 
@@ -22,6 +22,16 @@ class TasksAPIs implements TasksService {
          `${endpoints.stage}${stageId}${endpoints.task}`,
          data,
          apiMethods.post,
+         true
+      );
+   }
+
+   reorderTaskAPI(taskId: string, data: ReorderTaskAPIRequest) {
+      return networkCallWithAxios(
+         this.api,
+         `${endpoints.task}${taskId}/order/update/`,
+         data,
+         apiMethods.put,
          true
       );
    }

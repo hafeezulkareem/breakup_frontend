@@ -35,3 +35,9 @@ export interface CreateStageAPIRequest {
 export interface CreateTaskAPIRequest {
    title: string;
 }
+
+export interface ReorderTaskAPIRequest {
+   source_id: string;
+   destination_id: string;
+   order: number;
+}
