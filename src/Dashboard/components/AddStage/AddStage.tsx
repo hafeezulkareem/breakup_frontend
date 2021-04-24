@@ -12,13 +12,7 @@ import {
    AddStageInput,
 } from "./styledComponents";
 
-interface AddStageProps {
-   projectId: string;
-}
-
-const AddStage = observer((props: AddStageProps) => {
-   const { projectId } = props;
-
+const AddStage = observer((props) => {
    const [addStage, setAddStage] = useState(false);
    const [stageName, setStageName] = useState("");
    const {
@@ -47,7 +41,6 @@ const AddStage = observer((props: AddStageProps) => {
       if (event.keyCode === 13) {
          if (stageName.length >= 3) {
             createStageAPI(
-               projectId,
                { name: stageName },
                onSuccessCreateStageAPI,
                onFailureCreateStageAPI

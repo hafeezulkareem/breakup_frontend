@@ -101,7 +101,7 @@ const ProjectStages = observer((props: ProjectStagesProps) => {
                   <Stages projectId={projectId} />
                   {provided.placeholder}
                   <StageContainer>
-                     <AddStage projectId={projectId} />
+                     <AddStage />
                   </StageContainer>
                </StagesContainer>
             )}

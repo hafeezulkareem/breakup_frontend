@@ -81,13 +81,12 @@ class StagesStore {
 
    @action.bound
    async createStageAPI(
-      projectId: string,
       data: CreateStageAPIRequest,
       onSuccess: Function = (): void => {},
       onFailure: Function = (): void => {}
    ) {
       const createStageAPIPromise = this.stagesService.createStageAPI(
-         projectId,
+         this.projectId,
          data
       );
       const { name } = data;
