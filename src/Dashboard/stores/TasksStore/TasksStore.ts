@@ -95,14 +95,12 @@ class TasksStore {
 
    @action.bound
    async createTaskAPI(
-      projectId: string,
       stageId: string,
       data: CreateTaskAPIRequest,
       onSuccess: Function = (): void => {},
       onFailure: Function = (): void => {}
    ) {
       const createTaskAPIPromise = this.tasksService.createTaskAPI(
-         projectId,
          stageId,
          data
       );

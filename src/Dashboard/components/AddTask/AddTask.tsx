@@ -53,7 +53,6 @@ const AddTask = observer((props: AddTaskProps) => {
    const validateAndAddTask = (event) => {
       if (taskTitle.length) {
          createTaskAPI(
-            projectId,
             stageId,
             { title: taskTitle },
             onSuccessCreateTaskAPI,

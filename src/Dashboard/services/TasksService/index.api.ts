@@ -16,14 +16,10 @@ class TasksAPIs implements TasksService {
       this.api = create({ baseURL: "http://localhost:8000/api" });
    }
 
-   createTaskAPI(
-      projectId: string,
-      stageId: string,
-      data: CreateTaskAPIRequest
-   ) {
+   createTaskAPI(stageId: string, data: CreateTaskAPIRequest) {
       return networkCallWithAxios(
          this.api,
-         `${endpoints.project}${projectId}${endpoints.stage}${stageId}${endpoints.task}`,
+         `${endpoints.stage}${stageId}${endpoints.task}`,
          data,
          apiMethods.post,
          true
