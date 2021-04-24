@@ -1,13 +1,14 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
 import { GrEdit } from "react-icons/gr";
-import { Draggable } from "react-beautiful-dnd";
+import { Draggable, DraggableStateSnapshot } from "react-beautiful-dnd";
 
 import { TaskModel } from "../../stores/models/TaskModel";
 
 import {
    EditButton,
    TaskContainer,
+   TaskDraggableContainer,
    TaskTitle,
    TaskTitleContainer,
    TitleBar,
@@ -26,22 +27,26 @@ const Task = observer((props: TaskProps) => {
 
    return (
       <Draggable draggableId={id} index={index}>
-         {(provided) => (
-            <TaskContainer
-               ref={provided.innerRef}
-               {...provided.draggableProps}
-               {...provided.dragHandleProps}
-            >
-               <TitleBar>
-                  <TaskTitleContainer>
-                     <TaskTitle>{title}</TaskTitle>
-                  </TaskTitleContainer>
-                  <EditButton disableShadow>
-                     <GrEdit size={14} />
-                  </EditButton>
-               </TitleBar>
-            </TaskContainer>
-         )}
+         {(provided, snapshot: DraggableStateSnapshot) => {
+            return (
+               <TaskDraggableContainer
+                  ref={provided.innerRef}
+                  {...provided.draggableProps}
+                  {...provided.dragHandleProps}
+               >
+                  <TaskContainer isDragging={snapshot.isDragging}>
+                     <TitleBar>
+                        <TaskTitleContainer>
+                           <TaskTitle>{title}</TaskTitle>
+                        </TaskTitleContainer>
+                        <EditButton disableShadow>
+                           <GrEdit size={14} />
+                        </EditButton>
+                     </TitleBar>
+                  </TaskContainer>
+               </TaskDraggableContainer>
+            );
+         }}
       </Draggable>
    );
 });

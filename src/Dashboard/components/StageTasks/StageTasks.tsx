@@ -1,5 +1,5 @@
-import { observer } from "mobx-react-lite";
 import React from "react";
+import { observer } from "mobx-react-lite";
 import { Droppable } from "react-beautiful-dnd";
 
 import { useStores } from "../../../Common/stores";

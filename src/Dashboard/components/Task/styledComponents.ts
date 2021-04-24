@@ -13,9 +13,8 @@ export const EditButton = styled(Button)`
    }
 `;
 
-export const TaskContainer = styled.div`
+export const TaskDraggableContainer = styled.div`
    ${tw`
-        flex flex-col bg-white rounded-8px shadow p-12px cursor-pointer
         mt-12px
     `}
    &:first-child {
@@ -23,6 +22,13 @@ export const TaskContainer = styled.div`
          mt-0
        `}
    }
+`;
+
+export const TaskContainer = styled.div`
+   ${tw`
+        flex flex-col bg-white rounded-8px shadow p-12px cursor-pointer
+        transition-all duration-100
+    `}
    &:hover {
       ${EditButton} {
          ${tw`
@@ -33,6 +39,7 @@ export const TaskContainer = styled.div`
          bg-porcelain
       `}
    }
+   ${({ isDragging }) => (isDragging ? tw`transform rotate-6` : tw``)}
 `;
 
 export const TitleBar = styled.div`
