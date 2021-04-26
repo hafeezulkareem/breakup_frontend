@@ -2,13 +2,18 @@
    "id": "12345678976543",
    "title": "Sample Project",
    "description": "Hell, this is sample project description",
-   "admin_id": "3487654345678",
-   "admin_name": "Hafeezul Kareem Shaik",
    "stages": [
       { "id": "5478767", "name": "Stage 1", "tasks": [] },
       { "id": "5478768", "name": "Stage 2", "tasks": [] },
       { "id": "5478769", "name": "Stage 3", "tasks": [] },
       { "id": "5478770", "name": "Stage 4", "tasks": [] },
       { "id": "5478771", "name": "Stage 5", "tasks": [] }
+   ],
+   "members": [
+      {
+         "user": "testuser@gmail.com",
+         "role": "ADMIN"
+      },
+      { "user": "hafeezulkareem20@gmail.com", "role": "MEMBER" }
    ]
 }

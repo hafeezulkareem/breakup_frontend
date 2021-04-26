@@ -19,12 +19,16 @@ export interface StageResponse {
    tasks: Array<any>;
 }
 
+export interface MemberDetails {
+   user: string;
+   role: string;
+}
+
 export interface GetProjectDetailsAPIResponse {
    id: string;
    title: string;
    description;
-   admin_id: string;
-   admin_name: string;
+   members: Array<MemberDetails>;
    stages: Array<StageResponse>;
 }
 

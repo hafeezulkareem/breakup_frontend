@@ -1,21 +1,21 @@
 import { makeObservable, observable } from "mobx";
 
+import { MemberDetails } from "../../../types";
+
 import { MiniProjectModel } from "../MiniProjectModel";
 
 class ProjectDetailsModel {
    @observable projectBasicDetails: MiniProjectModel;
-   adminId: string;
-   adminName: string;
+   @observable members: MemberDetails;
 
-   constructor({ id, title, description, adminId, adminName }) {
+   constructor({ id, title, description, members }) {
       makeObservable(this);
       this.projectBasicDetails = new MiniProjectModel({
          id,
          title,
          description,
       });
-      this.adminId = adminId;
-      this.adminName = adminName;
+      this.members = members;
    }
 }
 

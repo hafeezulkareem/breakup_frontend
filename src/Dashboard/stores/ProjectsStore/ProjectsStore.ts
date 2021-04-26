@@ -159,21 +159,13 @@ class ProjectsStore {
       response: GetProjectDetailsAPIResponse | null
    ) {
       if (response) {
-         const {
-            id,
-            title,
-            description,
-            admin_id: adminId,
-            admin_name: adminName,
-            stages,
-         } = response;
+         const { id, title, description, members, stages } = response;
          this.stagesStore.setProjectIdAndStages(id, stages);
          this.projectDetails = new ProjectDetailsModel({
             id,
             title,
             description,
-            adminId,
-            adminName,
+            members,
          });
       }
    }
