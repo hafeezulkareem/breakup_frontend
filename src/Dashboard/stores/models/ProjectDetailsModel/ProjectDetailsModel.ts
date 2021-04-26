@@ -1,4 +1,4 @@
-import { makeObservable, observable } from "mobx";
+import { action, makeObservable, observable } from "mobx";
 
 import { MemberDetails } from "../../../types";
 
@@ -6,7 +6,7 @@ import { MiniProjectModel } from "../MiniProjectModel";
 
 class ProjectDetailsModel {
    @observable projectBasicDetails: MiniProjectModel;
-   @observable members: MemberDetails;
+   @observable members: Array<MemberDetails>;
 
    constructor({ id, title, description, members }) {
       makeObservable(this);
@@ -16,6 +16,11 @@ class ProjectDetailsModel {
          description,
       });
       this.members = members;
+   }
+
+   @action.bound
+   addNewMember(member) {
+      this.members.push(member);
    }
 }
 

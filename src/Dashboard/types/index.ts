@@ -48,3 +48,7 @@ export interface ReorderTaskAPIRequest extends ReorderAPIRequest {
    source_id: string;
    destination_id: string;
 }
+
+export interface AddMemberAPIRequest {
+   email: string;
+}

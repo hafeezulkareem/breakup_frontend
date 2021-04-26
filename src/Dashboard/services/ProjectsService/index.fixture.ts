@@ -18,6 +18,10 @@ class ProjectsFixtures implements ProjectsService {
    getProjectDetailsAPI() {
       return resolveWithTimeOut(getProjectDetailsAPIResponse);
    }
+
+   addMemberAPI() {
+      return resolveWithTimeOut({});
+   }
 }
 
 export { ProjectsFixtures };

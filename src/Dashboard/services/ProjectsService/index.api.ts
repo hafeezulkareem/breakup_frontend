@@ -8,6 +8,7 @@ import {
    CreateAPIResponse,
    GetProjectDetailsAPIResponse,
    GetProjectsAPIResponse,
+   AddMemberAPIRequest,
 } from "../../types";
 
 import { endpoints } from "../endpoints";
@@ -47,6 +48,19 @@ class ProjectsAPIs implements ProjectsService {
          `${endpoints.project}${id}/`,
          {},
          apiMethods.get,
+         true
+      );
+   }
+
+   addMemberAPI(
+      id: string,
+      data: AddMemberAPIRequest
+   ): Promise<GetProjectDetailsAPIResponse> {
+      return networkCallWithAxios(
+         this.api,
+         `${endpoints.project}${id}/member/add/`,
+         data,
+         apiMethods.post,
          true
       );
    }

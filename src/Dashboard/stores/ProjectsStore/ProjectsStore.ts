@@ -9,6 +9,7 @@ import {
    CreateAPIResponse,
    GetProjectDetailsAPIResponse,
    GetProjectsAPIResponse,
+   AddMemberAPIRequest,
 } from "../../types";
 
 import { MiniProjectModel } from "../models/MiniProjectModel";
@@ -24,6 +25,8 @@ class ProjectsStore {
    @observable getProjectsAPIError!: string;
    @observable getProjectDetailsAPIStatus!: number;
    @observable getProjectDetailsAPIError!: string;
+   @observable addMemberAPIStatus!: number;
+   @observable addMemberAPIError!: string;
    @observable projectDetails!: ProjectDetailsModel | null;
    stagesStore: StagesStore;
 
@@ -44,6 +47,8 @@ class ProjectsStore {
       this.projectDetails = null;
       this.getProjectDetailsAPIStatus = 0;
       this.getProjectDetailsAPIError = "";
+      this.addMemberAPIStatus = 0;
+      this.addMemberAPIError = "";
    }
 
    @action.bound
@@ -190,6 +195,53 @@ class ProjectsStore {
             this.setGetProjectDetailsAPIStatus(apiStatus.failed);
             this.setGetProjectDetailsAPIError(err);
             onFailure();
+         });
+   }
+
+   @action.bound
+   setAddMemberAPIStatus(status: number) {
+      this.addMemberAPIStatus = status;
+   }
+
+   @action.bound
+   setAddMemberAPIError(error) {
+      this.addMemberAPIError = getParsedErrorMessage(error);
+   }
+
+   @action.bound
+   setAddMemberAPIResponse(email: string) {
+      this.projectDetails?.addNewMember({ user: email, role: "MEMBER" });
+   }
+
+   @action.bound
+   async addMemberAPI(
+      data: AddMemberAPIRequest,
+      onSuccess: Function = (): void => {},
+      onFailure: Function = (): void => {}
+   ) {
+      let projectId = "";
+      if (this.projectDetails) {
+         const {
+            projectBasicDetails: { id },
+         } = this.projectDetails;
+         projectId = id;
+      }
+      const addMemberAPIPromise = this.projectsService.addMemberAPI(
+         projectId,
+         data
+      );
+      const { email } = data;
+      this.setAddMemberAPIStatus(apiStatus.loading);
+      await addMemberAPIPromise
+         .then((data) => {
+            this.setAddMemberAPIStatus(apiStatus.success);
+            this.setAddMemberAPIResponse(email);
+            onSuccess();
+         })
+         .catch((err) => {
+            this.setAddMemberAPIStatus(apiStatus.failed);
+            this.setAddMemberAPIError(err);
+            onFailure(this.addMemberAPIError);
          });
    }
 
