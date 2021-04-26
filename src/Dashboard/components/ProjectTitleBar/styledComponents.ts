@@ -21,3 +21,9 @@ export const MenuButtonText = styled.span`
         ml-8px
     `}
 `;
+
+export const AddMemberContainer = styled.div`
+   ${tw`
+        flex relative
+    `}
+`;
