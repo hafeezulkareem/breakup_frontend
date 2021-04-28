@@ -13,10 +13,16 @@ export interface GetProjectsAPIResponse {
    description: string;
 }
 
+interface TaskResponse {
+   id: string;
+   title: string;
+   description: string;
+}
+
 export interface StageResponse {
    id: string;
    name: string;
-   tasks: Array<any>;
+   tasks: Array<TaskResponse>;
 }
 
 export interface MemberDetails {

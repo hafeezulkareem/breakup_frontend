@@ -27,10 +27,12 @@ const Task = observer((props: TaskProps) => {
    } = props;
 
    const {
-      taskUIStore: { updateTaskModalVisibility },
+      taskUIStore: { updateTaskModalVisibility, setTask },
    } = useStores();
 
    const openTaskModal = () => {
+      const { task } = props;
+      setTask(task);
       updateTaskModalVisibility(true);
    };
 

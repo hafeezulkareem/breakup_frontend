@@ -6,8 +6,9 @@ import { RiCloseCircleFill } from "react-icons/ri";
 import { useStores } from "../../../Common/stores";
 import { colors } from "../../../Common/themes/colors";
 
+import { TaskDescription } from "../TaskDescription";
+
 import {
-   DescriptionText,
    TaskDetailsContainer,
    TaskDetailsLeftContainer,
    TaskDetailsRightContainer,
@@ -20,7 +21,7 @@ import "./styles.css";
 
 const TaskModal = observer((props) => {
    const {
-      taskUIStore: { showTaskModal, updateTaskModalVisibility },
+      taskUIStore: { showTaskModal, updateTaskModalVisibility, task },
    } = useStores();
 
    const closeModal = () => {
@@ -45,7 +46,7 @@ const TaskModal = observer((props) => {
             </TaskTitleBar>
             <TaskDetailsContainer>
                <TaskDetailsLeftContainer>
-                  <DescriptionText>Description</DescriptionText>
+                  <TaskDescription description="Task Description" />
                </TaskDetailsLeftContainer>
                <TaskDetailsRightContainer>
                   Assignee Due Date
