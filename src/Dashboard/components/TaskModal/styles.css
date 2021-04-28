@@ -1,5 +1,5 @@
 .task-modal {
-   width: 50%;
+   width: 75%;
    max-height: 500px;
    position: fixed;
    top: 10%;
@@ -35,7 +35,7 @@
 }
 
 @media only screen and (min-width: 1024px) {
-   .add-project-modal {
+   .task-modal {
       width: 50%;
    }
 }
