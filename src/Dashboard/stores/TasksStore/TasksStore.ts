@@ -49,7 +49,7 @@ class TasksStore {
          const { id, tasks } = stage;
          const taskModels = tasks.map((task) => {
             const { id, title, description } = task;
-            return new TaskModel({ id, title, description });
+            return new TaskModel(this.tasksService, { id, title, description });
          });
          this.tasks[id] = taskModels;
       });
@@ -95,7 +95,7 @@ class TasksStore {
       if (response) {
          const { id } = response;
          this.tasks[stageId].push(
-            new TaskModel({ id, title, description: "" })
+            new TaskModel(this.tasksService, { id, title, description: "" })
          );
       }
    }

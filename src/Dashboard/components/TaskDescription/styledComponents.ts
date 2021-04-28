@@ -37,3 +37,9 @@ export const Description = styled.span`
         text-sm
     `}
 `;
+
+export const DescriptionPlaceholder = styled(Description)`
+   ${tw`
+        text-darkGray
+    `}
+`;

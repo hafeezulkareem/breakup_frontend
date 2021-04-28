@@ -3,7 +3,11 @@ import { create } from "apisauce";
 import { networkCallWithAxios } from "../../../Common/utils/APIUtils";
 import { apiMethods } from "../../../Common/constants/APIConstants";
 
-import { CreateTaskAPIRequest, ReorderTaskAPIRequest } from "../../types";
+import {
+   CreateTaskAPIRequest,
+   ReorderTaskAPIRequest,
+   UpdateTaskDescriptionAPIRequest,
+} from "../../types";
 
 import { endpoints } from "../endpoints";
 
@@ -30,6 +34,16 @@ class TasksAPIs implements TasksService {
       return networkCallWithAxios(
          this.api,
          `${endpoints.task}${taskId}/order/update/`,
+         data,
+         apiMethods.put,
+         true
+      );
+   }
+
+   updateDescriptionAPI(taskId: string, data: UpdateTaskDescriptionAPIRequest) {
+      return networkCallWithAxios(
+         this.api,
+         `${endpoints.task}${taskId}/description/update/`,
          data,
          apiMethods.put,
          true

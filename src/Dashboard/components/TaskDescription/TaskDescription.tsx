@@ -1,26 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
+import cogoToast from "cogo-toast";
+
+import { TaskModel } from "../../stores/models/TaskModel";
 
 import {
    Description,
    DescriptionContainer,
    DescriptionInput,
+   DescriptionPlaceholder,
    DescriptionText,
    DescriptionTextContainer,
    TaskDescriptionContainer,
 } from "./styledComponents";
 
 interface TaskDescriptionProps {
-   description: string;
+   task: TaskModel | null;
 }
 
 const TaskDescription = observer((props: TaskDescriptionProps) => {
+   const { task } = props;
+
    const [editDescription, setEditDescription] = useState(false);
    const [description, setDescription] = useState("");
 
    useEffect(() => {
-      const { description } = props;
-      setDescription(description);
+      setDescription(task ? task.description : "");
    }, [props]);
 
    const showEditDescription = () => {
@@ -35,9 +40,32 @@ const TaskDescription = observer((props: TaskDescriptionProps) => {
       setDescription(event.target.value);
    };
 
+   const onSuccessUpdateDescription = () => {
+      cogoToast.success("Description updated successfully", {
+         position: "bottom-center",
+      });
+      hideEditDescription();
+   };
+
+   const onFailureUpdateDescription = (error: string) => {
+      cogoToast.error(error, { position: "bottom-center" });
+   };
+
+   const updateDescription = () => {
+      if (description !== task?.description) {
+         task?.updateDescriptionAPI(
+            { description },
+            onSuccessUpdateDescription,
+            onFailureUpdateDescription
+         );
+      } else {
+         hideEditDescription();
+      }
+   };
+
    const checkForCompletion = (event) => {
       if (event.keyCode === 13) {
-         hideEditDescription();
+         updateDescription();
       }
    };
 
@@ -50,14 +78,22 @@ const TaskDescription = observer((props: TaskDescriptionProps) => {
                   placeholder="Description..."
                   fullWidth
                   autoFocus
-                  onBlur={hideEditDescription}
+                  onBlur={updateDescription}
                   value={description}
                   onChange={onChangeDescription}
                   onKeyDown={checkForCompletion}
                />
             ) : (
                <DescriptionTextContainer onClick={showEditDescription}>
-                  <Description>Task Description</Description>
+                  <Description>
+                     {task?.description === "" ? (
+                        <DescriptionPlaceholder>
+                           Add description...
+                        </DescriptionPlaceholder>
+                     ) : (
+                        task?.description
+                     )}
+                  </Description>
                </DescriptionTextContainer>
             )}
          </DescriptionContainer>

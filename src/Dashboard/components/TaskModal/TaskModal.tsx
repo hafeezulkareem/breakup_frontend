@@ -46,7 +46,7 @@ const TaskModal = observer((props) => {
             </TaskTitleBar>
             <TaskDetailsContainer>
                <TaskDetailsLeftContainer>
-                  <TaskDescription description="Task Description" />
+                  <TaskDescription task={task} />
                </TaskDetailsLeftContainer>
                <TaskDetailsRightContainer>
                   Assignee Due Date
