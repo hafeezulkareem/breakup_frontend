@@ -1,6 +1,9 @@
 import tw, { styled } from "twin.macro";
 
 import Button from "../../../Common/components/Button";
+import { getScreenSize } from "../../../Common/utils/DisplayUtils";
+
+const screenSize = getScreenSize();
 
 export const StagesContainer = styled.div`
    ${tw`
@@ -12,7 +15,7 @@ export const StageContainer = styled.div`
    ${tw`
         flex flex-col pr-16px
     `}
-   min-width: calc(25% - 12px);
+   ${`min-width: ${screenSize / 4 - 42}px;`}
 `;
 
 export const CenterContainer = styled(StagesContainer)`

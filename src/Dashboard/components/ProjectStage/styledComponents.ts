@@ -1,13 +1,16 @@
 import tw, { styled } from "twin.macro";
 
 import Button from "../../../Common/components/Button";
+import { getScreenSize } from "../../../Common/utils/DisplayUtils";
+
+const screenSize = getScreenSize();
 
 export const ProjectStageContainer = styled.div`
    ${tw`
         mr-16px px-12px shadow-sm rounded-8px pb-12px bg-darkGray10
     `}
    height: fit-content;
-   min-width: calc(25% - 36px);
+   ${`min-width: ${screenSize / 4 - 65}px;`}
 `;
 
 export const StageTitleBar = styled.div`
