@@ -10,7 +10,7 @@ export const TaskDescriptionContainer = styled.div`
 
 export const DescriptionText = styled.span`
    ${tw`
-        text-darkGray font-bold
+        text-14px text-darkGray font-bold
     `}
 `;
 

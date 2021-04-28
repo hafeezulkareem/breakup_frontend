@@ -54,3 +54,9 @@ export const TaskDetailsRightContainer = styled(TaskDetails)`
         w-1/4 items-end
     `}
 `;
+
+export const TaskRightSectionTitle = styled.span`
+   ${tw`
+        text-14px text-darkGray font-bold
+    `}
+`;

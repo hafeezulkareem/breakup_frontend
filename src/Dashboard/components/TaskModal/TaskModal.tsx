@@ -14,6 +14,7 @@ import {
    TaskDetailsRightContainer,
    TaskModalCloseButton,
    TaskModalContainer,
+   TaskRightSectionTitle,
    TaskTitle,
    TaskTitleBar,
 } from "./styledComponents";
@@ -49,7 +50,7 @@ const TaskModal = observer((props) => {
                   <TaskDescription task={task} />
                </TaskDetailsLeftContainer>
                <TaskDetailsRightContainer>
-                  Assignee Due Date
+                  <TaskRightSectionTitle>Add to Card</TaskRightSectionTitle>
                </TaskDetailsRightContainer>
             </TaskDetailsContainer>
          </TaskModalContainer>
