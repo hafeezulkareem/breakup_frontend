@@ -13,6 +13,7 @@ import {
    TaskTitleContainer,
    TitleBar,
 } from "./styledComponents";
+import { useStores } from "../../../Common/stores";
 
 interface TaskProps {
    task: TaskModel;
@@ -25,6 +26,14 @@ const Task = observer((props: TaskProps) => {
       index,
    } = props;
 
+   const {
+      taskUIStore: { updateTaskModalVisibility },
+   } = useStores();
+
+   const openTaskModal = () => {
+      updateTaskModalVisibility(true);
+   };
+
    return (
       <Draggable draggableId={id} index={index}>
          {(provided, snapshot: DraggableStateSnapshot) => {
@@ -34,7 +43,10 @@ const Task = observer((props: TaskProps) => {
                   {...provided.draggableProps}
                   {...provided.dragHandleProps}
                >
-                  <TaskContainer isDragging={snapshot.isDragging}>
+                  <TaskContainer
+                     isDragging={snapshot.isDragging}
+                     onClick={openTaskModal}
+                  >
                      <TitleBar>
                         <TaskTitleContainer>
                            <TaskTitle>{title}</TaskTitle>

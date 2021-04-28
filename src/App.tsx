@@ -8,6 +8,7 @@ import { StoreContext, stores } from "./Common/stores";
 import { DashboardRoute } from "./Dashboard/routes/DashboardRoute";
 import { AddProjectModal } from "./Dashboard/components/AddProjectModal";
 import { ProjectRoute } from "./Dashboard/routes/ProjectRoute";
+import { TaskModal } from "./Dashboard/components/TaskModal";
 
 function App() {
    return (
@@ -22,6 +23,7 @@ function App() {
             </Switch>
          </Router>
          <AddProjectModal />
+         <TaskModal />
       </StoreContext.Provider>
    );
 }

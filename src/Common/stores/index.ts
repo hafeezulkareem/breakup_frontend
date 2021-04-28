@@ -12,6 +12,7 @@ import { TasksFixture } from "../../Dashboard/services/TasksService/index.fixtur
 import { ProjectsStore } from "../../Dashboard/stores/ProjectsStore";
 import { StagesStore } from "../../Dashboard/stores/StagesStore";
 import { TasksStore } from "../../Dashboard/stores/TasksStore";
+import { TaskUIStore } from "../../Dashboard/stores/TaskUIStore";
 import { UIStore } from "../../Dashboard/stores/UIStore";
 
 const useFixtures = false;
@@ -49,6 +50,7 @@ const uiStore = new UIStore();
 const tasksStore = new TasksStore(getTasksFixtures());
 const stagesStore = new StagesStore(getStagesFixtures(), tasksStore);
 const projectsStore = new ProjectsStore(getProjectsFixtures(), stagesStore);
+const taskUIStore = new TaskUIStore();
 
 export const stores = {
    authStore,
@@ -56,6 +58,7 @@ export const stores = {
    projectsStore,
    stagesStore,
    tasksStore,
+   taskUIStore,
 };
 
 export const StoreContext = createContext(stores);
