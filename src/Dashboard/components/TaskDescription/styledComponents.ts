@@ -8,15 +8,21 @@ export const TaskDescriptionContainer = styled.div`
     `}
 `;
 
+export const DescriptionIconAndText = styled.div`
+   ${tw`
+        flex items-end
+    `}
+`;
+
 export const DescriptionText = styled.span`
    ${tw`
-        text-14px text-darkGray font-bold
+        text-14px text-sanJuan font-bold ml-8px
     `}
 `;
 
 export const DescriptionContainer = styled.div`
    ${tw`
-        w-full flex mt-8px
+        w-full flex mt-12px ml-28px
     `}
 `;
 
@@ -30,6 +36,11 @@ export const DescriptionTextContainer = styled.div`
    ${tw`
         w-full flex bg-darkGray10 cursor-pointer rounded-4px p-8px
     `}
+   &:hover {
+      ${tw`
+            bg-darkGray
+        `}
+   }
 `;
 
 export const Description = styled.span`

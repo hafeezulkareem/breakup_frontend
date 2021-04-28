@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import cogoToast from "cogo-toast";
+import { FiAlignLeft } from "react-icons/fi";
 
 import { TaskModel } from "../../stores/models/TaskModel";
 
 import {
    Description,
    DescriptionContainer,
+   DescriptionIconAndText,
    DescriptionInput,
    DescriptionPlaceholder,
    DescriptionText,
    DescriptionTextContainer,
    TaskDescriptionContainer,
 } from "./styledComponents";
+import { colors } from "../../../Common/themes/colors";
 
 interface TaskDescriptionProps {
    task: TaskModel | null;
@@ -71,7 +74,10 @@ const TaskDescription = observer((props: TaskDescriptionProps) => {
 
    return (
       <TaskDescriptionContainer>
-         <DescriptionText>Description</DescriptionText>
+         <DescriptionIconAndText>
+            <FiAlignLeft size={22} color={colors.sanJuan} />
+            <DescriptionText>Description</DescriptionText>
+         </DescriptionIconAndText>
          <DescriptionContainer>
             {editDescription ? (
                <DescriptionInput
