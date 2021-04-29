@@ -25,11 +25,6 @@ export interface StageResponse {
    tasks: Array<TaskResponse>;
 }
 
-export interface MemberDetails {
-   user: string;
-   role: string;
-}
-
 export interface GetProjectDetailsAPIResponse {
    id: string;
    title: string;
@@ -61,4 +56,14 @@ export interface AddMemberAPIRequest {
 
 export interface UpdateTaskDescriptionAPIRequest {
    description: string;
+}
+
+export interface AddMemberAPIResponse {
+   id: string;
+   name: string;
+   email: string;
+}
+
+export interface MemberDetails extends AddMemberAPIResponse {
+   role: string;
 }

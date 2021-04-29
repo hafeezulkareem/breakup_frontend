@@ -28,7 +28,7 @@ export const MembersListContainer = styled.div`
 
 export const MemberContainer = styled.div`
    ${tw`
-        flex items-center justify-between
+        flex items-center justify-between mt-12px
     `}
 `;
 
@@ -40,7 +40,7 @@ export const LeftContainer = styled.div`
 
 export const MemberPicContainer = styled.div`
    ${tw`
-        w-36px h-36px
+        w-36px h-36px shadow
     `}
 `;
 

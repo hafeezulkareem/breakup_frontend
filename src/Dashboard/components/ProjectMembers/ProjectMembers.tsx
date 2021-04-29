@@ -4,6 +4,9 @@ import { RiCloseCircleFill, RiTeamLine } from "react-icons/ri";
 import { FcBusinessman } from "react-icons/fc";
 
 import { colors } from "../../../Common/themes/colors";
+import { useStores } from "../../../Common/stores";
+
+import { MemberDetails } from "../../types";
 
 import {
    LeftContainer,
@@ -19,12 +22,14 @@ import {
    TeamText,
 } from "./styledComponents";
 
-interface ProjectMembersProps {
-   members: Array<any>;
-}
-
-const ProjectMembers = observer((props: ProjectMembersProps) => {
-   const { members } = props;
+const ProjectMembers = observer((props) => {
+   const {
+      projectsStore: { projectDetails },
+   } = useStores();
+   let members: Array<MemberDetails> = [];
+   if (projectDetails) {
+      members = projectDetails.members;
+   }
 
    return (
       <MembersContainer>
@@ -34,7 +39,7 @@ const ProjectMembers = observer((props: ProjectMembersProps) => {
          </MembersTitleBar>
          <MembersListContainer>
             {members.map((member) => {
-               const { id, name } = member;
+               const { id, name, role } = member;
                return (
                   <MemberContainer key={id}>
                      <LeftContainer>
@@ -43,15 +48,19 @@ const ProjectMembers = observer((props: ProjectMembersProps) => {
                         </MemberPicContainer>
                         <MemberNameAndRoleContainer>
                            <MemberName>{name}</MemberName>
-                           <MemberTypeText>Normal</MemberTypeText>
+                           <MemberTypeText>{`${
+                              role.charAt(0) + role.slice(1).toLowerCase()
+                           }`}</MemberTypeText>
                         </MemberNameAndRoleContainer>
                      </LeftContainer>
-                     <MemberRemoveButton>
-                        <RiCloseCircleFill
-                           size={20}
-                           color={colors.persianRed}
-                        />
-                     </MemberRemoveButton>
+                     {role !== "ADMIN" ? (
+                        <MemberRemoveButton>
+                           <RiCloseCircleFill
+                              size={20}
+                              color={colors.persianRed}
+                           />
+                        </MemberRemoveButton>
+                     ) : null}
                   </MemberContainer>
                );
             })}

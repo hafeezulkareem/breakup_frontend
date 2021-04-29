@@ -5,7 +5,6 @@ import { History } from "history";
 
 import { isSignedIn } from "../../../Common/utils/AuthUtils";
 import { useStores } from "../../../Common/stores";
-import { UserModel } from "../../../Authentication/stores/models/UserModel";
 
 import { Header } from "../../components/Header";
 import { TitleAndNavigation } from "../../components/TitleAndNavigation";
@@ -98,14 +97,6 @@ const ProjectRoute = observer((props: ProjectRouteProps) => {
                hideProjectDetails={hideProjectDetails}
                title={projectTitle}
                description={projectDescription}
-               members={[
-                  new UserModel({
-                     id: "123456789",
-                     name: "Hafeez",
-                     email: "hafeezulkareem@gmail.com",
-                     password: "12345",
-                  }),
-               ]}
             />
             <ProjectStages
                getProjectDetails={getProjectDetails}

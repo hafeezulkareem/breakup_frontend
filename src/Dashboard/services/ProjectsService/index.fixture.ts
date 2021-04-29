@@ -3,6 +3,7 @@ import { resolveWithTimeOut } from "../../../Common/utils/TestUtils";
 import postCreateProjectAPIResponse from "../../fixtures/postCreateProjectAPIResponse.json";
 import getProjectsAPIResponse from "../../fixtures/getProjectsAPIResponse.json";
 import getProjectDetailsAPIResponse from "../../fixtures/getProjectDetailsAPIResponse.json";
+import addMemberAPIResponse from "../../fixtures/addMemberAPIResponse.json";
 
 import { ProjectsService } from ".";
 
@@ -20,7 +21,7 @@ class ProjectsFixtures implements ProjectsService {
    }
 
    addMemberAPI() {
-      return resolveWithTimeOut({});
+      return resolveWithTimeOut(addMemberAPIResponse);
    }
 }
 

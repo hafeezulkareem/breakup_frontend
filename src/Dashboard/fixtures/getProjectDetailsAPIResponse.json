@@ -11,9 +11,16 @@
    ],
    "members": [
       {
-         "user": "testuser@gmail.com",
+         "id": "56654345678",
+         "name": "Test User",
+         "email": "testuser@gmail.com",
          "role": "ADMIN"
       },
-      { "user": "hafeezulkareem20@gmail.com", "role": "MEMBER" }
+      {
+         "id": "956798765678",
+         "name": "Hafeezul Kareem Shaik",
+         "email": "hafeezulkareem20@gmail.com",
+         "role": "MEMBER"
+      }
    ]
 }

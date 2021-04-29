@@ -4,7 +4,7 @@ import { IoClose } from "react-icons/io5";
 import { MdDescription } from "react-icons/md";
 import { GrEdit } from "react-icons/gr";
 
-import { UserModel } from "../../../Authentication/stores/models/UserModel";
+import { ProjectMembers } from "../ProjectMembers";
 
 import {
    CloseButton,
@@ -18,24 +18,16 @@ import {
    ProjectTitle,
    TitleBar,
 } from "./styledComponents";
-import { ProjectMembers } from "../ProjectMembers";
 
 interface ProjectDetailsProps {
    shouldShow: boolean;
    hideProjectDetails: () => void;
    title: string;
    description: string;
-   members: Array<UserModel>;
 }
 
 const ProjectDetails = observer((props: ProjectDetailsProps) => {
-   const {
-      shouldShow,
-      hideProjectDetails,
-      title,
-      description,
-      members,
-   } = props;
+   const { shouldShow, hideProjectDetails, title, description } = props;
 
    return (
       <ProjectDetailsContainer shouldShow={shouldShow}>
@@ -57,7 +49,7 @@ const ProjectDetails = observer((props: ProjectDetailsProps) => {
             <ProjectDescription>{description}</ProjectDescription>
          </DescriptionContainer>
          <Divider />
-         <ProjectMembers members={members} />
+         <ProjectMembers />
       </ProjectDetailsContainer>
    );
 });

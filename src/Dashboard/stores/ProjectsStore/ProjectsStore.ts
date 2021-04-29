@@ -10,6 +10,7 @@ import {
    GetProjectDetailsAPIResponse,
    GetProjectsAPIResponse,
    AddMemberAPIRequest,
+   AddMemberAPIResponse,
 } from "../../types";
 
 import { MiniProjectModel } from "../models/MiniProjectModel";
@@ -209,8 +210,11 @@ class ProjectsStore {
    }
 
    @action.bound
-   setAddMemberAPIResponse(email: string) {
-      this.projectDetails?.addNewMember({ user: email, role: "MEMBER" });
+   setAddMemberAPIResponse(response: AddMemberAPIResponse) {
+      if (response) {
+         const { id, name, email } = response;
+         this.projectDetails?.addNewMember({ id, name, email, role: "MEMBER" });
+      }
    }
 
    @action.bound
@@ -230,12 +234,11 @@ class ProjectsStore {
          projectId,
          data
       );
-      const { email } = data;
       this.setAddMemberAPIStatus(apiStatus.loading);
       await addMemberAPIPromise
          .then((data) => {
             this.setAddMemberAPIStatus(apiStatus.success);
-            this.setAddMemberAPIResponse(email);
+            this.setAddMemberAPIResponse(data);
             onSuccess();
          })
          .catch((err) => {
