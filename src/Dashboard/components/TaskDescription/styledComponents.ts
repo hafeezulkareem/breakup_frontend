@@ -22,7 +22,7 @@ export const DescriptionText = styled.span`
 
 export const DescriptionContainer = styled.div`
    ${tw`
-        w-full flex mt-12px ml-28px
+        flex mt-12px ml-28px
     `}
 `;
 
