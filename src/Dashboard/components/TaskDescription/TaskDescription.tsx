@@ -3,6 +3,8 @@ import { observer } from "mobx-react-lite";
 import cogoToast from "cogo-toast";
 import { FiAlignLeft } from "react-icons/fi";
 
+import { colors } from "../../../Common/themes/colors";
+
 import { TaskModel } from "../../stores/models/TaskModel";
 
 import {
@@ -15,7 +17,6 @@ import {
    DescriptionTextContainer,
    TaskDescriptionContainer,
 } from "./styledComponents";
-import { colors } from "../../../Common/themes/colors";
 
 interface TaskDescriptionProps {
    task: TaskModel | null;

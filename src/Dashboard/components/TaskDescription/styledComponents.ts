@@ -24,11 +24,12 @@ export const DescriptionContainer = styled.div`
    ${tw`
         flex mt-12px ml-28px
     `}
+   min-height: 52px;
 `;
 
 export const DescriptionInput = styled(Input)`
    ${tw`
-        m-0
+        w-full m-0
     `}
 `;
 
@@ -45,7 +46,7 @@ export const DescriptionTextContainer = styled.div`
 
 export const Description = styled.span`
    ${tw`
-        text-sm
+        h-full text-sm
     `}
 `;
 
