@@ -38,7 +38,7 @@ export const DescriptionTextContainer = styled.div`
     `}
    &:hover {
       ${tw`
-            bg-darkGray
+            bg-gainsboro
         `}
    }
 `;
