@@ -7,6 +7,7 @@ import { useStores } from "../../../Common/stores";
 import { colors } from "../../../Common/themes/colors";
 
 import { TaskDescription } from "../TaskDescription";
+import { TaskAssignMember } from "../TaskAssignMember";
 
 import {
    TaskDetailsContainer,
@@ -51,6 +52,7 @@ const TaskModal = observer((props) => {
                </TaskDetailsLeftContainer>
                <TaskDetailsRightContainer>
                   <TaskRightSectionTitle>Add to Card</TaskRightSectionTitle>
+                  <TaskAssignMember />
                </TaskDetailsRightContainer>
             </TaskDetailsContainer>
          </TaskModalContainer>

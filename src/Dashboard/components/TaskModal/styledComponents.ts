@@ -45,7 +45,7 @@ export const TaskDetails = styled.div`
 
 export const TaskDetailsLeftContainer = styled(TaskDetails)`
    ${tw`
-        w-3/4
+        w-3/4 mr-12px
     `}
 `;
 

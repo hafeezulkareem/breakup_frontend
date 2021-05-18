@@ -27,7 +27,7 @@ export const StageName = styled.div`
 
 export const StageOptionsMenuButton = styled(Button)`
    ${tw`
-        bg-transparent p-0
+        bg-transparent p-0 text-xl
     `}
    &:hover {
       ${tw`

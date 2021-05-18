@@ -1,9 +1,11 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
-import { RiMoreFill } from "react-icons/ri";
 import { Draggable } from "react-beautiful-dnd";
 
+import { Popover } from "../../../Common/components/Popover";
+
 import { StageModel } from "../../stores/models/StageModel";
+import { stageMenuList } from "../../constants/MenuLists";
 
 import { AddTask } from "../AddTask";
 import { StageTasks } from "../StageTasks";
@@ -39,9 +41,17 @@ const ProjectStage = observer((props: ProjectStageProps) => {
             >
                <StageTitleBar>
                   <StageName>{name}</StageName>
-                  <StageOptionsMenuButton disableShadow>
-                     <RiMoreFill size={18} />
-                  </StageOptionsMenuButton>
+                  <Popover
+                     popoverButton={
+                        <StageOptionsMenuButton disableShadow>
+                           &hellip;
+                        </StageOptionsMenuButton>
+                     }
+                     onClickItem={(value) => {
+                        console.log(value);
+                     }}
+                     list={stageMenuList}
+                  />
                </StageTitleBar>
                <StageTasks stageId={id} />
                <BlockContainer>
