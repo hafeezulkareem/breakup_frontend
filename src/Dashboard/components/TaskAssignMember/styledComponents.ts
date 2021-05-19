@@ -4,13 +4,13 @@ import Button from "../../../Common/components/Button";
 
 export const AddMemberContainer = styled.div`
    ${tw`
-        w-full flex flex-col mt-12px relative
+        w-full flex justify-end mt-12px relative
     `}
 `;
 
 export const AssignMemberButton = styled(Button)`
    ${tw`
-        text-black flex justify-start items-center px-12px bg-darkGray10
+        w-auto text-black px-12px bg-darkGray10
     `}
    &:hover {
       ${tw`
