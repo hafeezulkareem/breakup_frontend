@@ -17,6 +17,7 @@ interface TaskResponse {
    id: string;
    title: string;
    description: string;
+   assignee: { name: string; email: string };
 }
 
 export interface StageResponse {
@@ -66,4 +67,8 @@ export interface AddMemberAPIResponse {
 
 export interface MemberDetails extends AddMemberAPIResponse {
    role: string;
+}
+
+export interface AssignMemberAPIRequest {
+   email: string;
 }

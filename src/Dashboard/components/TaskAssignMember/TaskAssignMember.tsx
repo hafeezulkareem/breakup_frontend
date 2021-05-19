@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
 import { BsFillPersonPlusFill } from "react-icons/bs";
+import cogoToast from "cogo-toast";
 
 import { useStores } from "../../../Common/stores";
 import { Popover } from "../../../Common/components/Popover";
+
+import { AssignMemberAPIRequest } from "../../types/";
 
 import {
    AddMemberContainer,
@@ -15,7 +18,17 @@ const membersListStyles = {
    width: "225px",
 };
 
-const TaskAssignMember = observer((props) => {
+interface TaskAssignMemberProps {
+   assignMemberAPI: (
+      data: AssignMemberAPIRequest,
+      onSuccess: () => void,
+      onFailure: (error: string) => void
+   ) => void;
+}
+
+const TaskAssignMember = observer((props: TaskAssignMemberProps) => {
+   const { assignMemberAPI } = props;
+
    const [showProjectMembers, setShowProjectMembers] = useState(false);
 
    const {
@@ -30,6 +43,26 @@ const TaskAssignMember = observer((props) => {
       });
    }
 
+   const onSuccessAssignMemberAPI = () => {
+      cogoToast.success("Member assigned to task", {
+         position: "bottom-center",
+      });
+   };
+
+   const onFailureAssignMemberAPI = (error: string) => {
+      cogoToast.error(error, {
+         position: "bottom-center",
+      });
+   };
+
+   const assignMember = (email: string) => {
+      assignMemberAPI(
+         { email },
+         onSuccessAssignMemberAPI,
+         onFailureAssignMemberAPI
+      );
+   };
+
    return (
       <AddMemberContainer>
          <Popover
@@ -41,9 +74,7 @@ const TaskAssignMember = observer((props) => {
                   <AssignMemberButtonText>Assign Member</AssignMemberButtonText>
                </AssignMemberButton>
             }
-            onClickItem={(value) => {
-               console.log(value);
-            }}
+            onClickItem={assignMember}
             list={members}
             menuListStyles={membersListStyles}
          />

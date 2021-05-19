@@ -1,4 +1,5 @@
 import {
+   AssignMemberAPIRequest,
    CreateAPIResponse,
    CreateTaskAPIRequest,
    ReorderTaskAPIRequest,
@@ -16,5 +17,10 @@ export interface TasksService {
    updateDescriptionAPI: (
       taskId: string,
       data: UpdateTaskDescriptionAPIRequest
+   ) => Promise<{}>;
+
+   assignMemberAPI: (
+      taskId: string,
+      data: AssignMemberAPIRequest
    ) => Promise<{}>;
 }

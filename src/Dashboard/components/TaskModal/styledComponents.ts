@@ -31,6 +31,12 @@ export const TaskModalCloseButton = styled(Button)`
    }
 `;
 
+export const TaskAssigneeDetailsContainer = styled.div`
+   ${tw`
+        mt-8px
+    `}
+`;
+
 export const TaskDetailsContainer = styled.div`
    ${tw`
         flex mt-16px

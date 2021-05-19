@@ -2,6 +2,7 @@ import React from "react";
 import { observer } from "mobx-react-lite";
 import Modal from "react-modal";
 import { RiCloseCircleFill } from "react-icons/ri";
+import Avatar from "react-avatar";
 
 import { useStores } from "../../../Common/stores";
 import { colors } from "../../../Common/themes/colors";
@@ -10,6 +11,7 @@ import { TaskDescription } from "../TaskDescription";
 import { TaskAssignMember } from "../TaskAssignMember";
 
 import {
+   TaskAssigneeDetailsContainer,
    TaskDetailsContainer,
    TaskDetailsLeftContainer,
    TaskDetailsRightContainer,
@@ -30,6 +32,12 @@ const TaskModal = observer((props) => {
       updateTaskModalVisibility(false);
    };
 
+   let assignMemberAPI, assignee;
+   if (task) {
+      assignMemberAPI = task.assignMemberAPI;
+      assignee = task.assignee;
+   }
+
    return (
       <Modal
          isOpen={showTaskModal}
@@ -46,13 +54,20 @@ const TaskModal = observer((props) => {
                   <RiCloseCircleFill size={20} color={colors.persianRed} />
                </TaskModalCloseButton>
             </TaskTitleBar>
+            <TaskAssigneeDetailsContainer>
+               <Avatar
+                  name={assignee ? assignee.name : ""}
+                  size="40"
+                  round="100%"
+               />
+            </TaskAssigneeDetailsContainer>
             <TaskDetailsContainer>
                <TaskDetailsLeftContainer>
                   <TaskDescription task={task} />
                </TaskDetailsLeftContainer>
                <TaskDetailsRightContainer>
                   <TaskRightSectionTitle>Add to Card</TaskRightSectionTitle>
-                  <TaskAssignMember />
+                  <TaskAssignMember assignMemberAPI={assignMemberAPI} />
                </TaskDetailsRightContainer>
             </TaskDetailsContainer>
          </TaskModalContainer>

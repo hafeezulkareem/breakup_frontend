@@ -48,8 +48,13 @@ class TasksStore {
       stages.forEach((stage) => {
          const { id, tasks } = stage;
          const taskModels = tasks.map((task) => {
-            const { id, title, description } = task;
-            return new TaskModel(this.tasksService, { id, title, description });
+            const { id, title, description, assignee } = task;
+            return new TaskModel(this.tasksService, {
+               id,
+               title,
+               description,
+               assignee,
+            });
          });
          this.tasks[id] = taskModels;
       });
@@ -95,7 +100,12 @@ class TasksStore {
       if (response) {
          const { id } = response;
          this.tasks[stageId].push(
-            new TaskModel(this.tasksService, { id, title, description: "" })
+            new TaskModel(this.tasksService, {
+               id,
+               title,
+               description: "",
+               assignee: {},
+            })
          );
       }
    }

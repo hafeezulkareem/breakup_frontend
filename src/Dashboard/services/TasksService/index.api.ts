@@ -4,6 +4,7 @@ import { networkCallWithAxios } from "../../../Common/utils/APIUtils";
 import { apiMethods } from "../../../Common/constants/APIConstants";
 
 import {
+   AssignMemberAPIRequest,
    CreateTaskAPIRequest,
    ReorderTaskAPIRequest,
    UpdateTaskDescriptionAPIRequest,
@@ -44,6 +45,16 @@ class TasksAPIs implements TasksService {
       return networkCallWithAxios(
          this.api,
          `${endpoints.task}${taskId}/description/update/`,
+         data,
+         apiMethods.put,
+         true
+      );
+   }
+
+   assignMemberAPI(taskId: string, data: AssignMemberAPIRequest) {
+      return networkCallWithAxios(
+         this.api,
+         `${endpoints.task}${taskId}/assign/member/`,
          data,
          apiMethods.put,
          true

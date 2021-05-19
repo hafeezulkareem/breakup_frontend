@@ -16,6 +16,10 @@ class TasksFixture implements TasksService {
    updateDescriptionAPI() {
       return resolveWithTimeOut({});
    }
+
+   assignMemberAPI() {
+      return resolveWithTimeOut({});
+   }
 }
 
 export { TasksFixture };
