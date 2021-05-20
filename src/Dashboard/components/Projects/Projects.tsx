@@ -37,10 +37,8 @@ const Projects = observer((props: ProjectsProps) => {
    } = useStores();
 
    useEffect(() => {
-      if (miniProjects.length === 0) {
-         getProjectsAPI();
-      }
-   }, [getProjectsAPI, miniProjects]);
+      getProjectsAPI();
+   }, [getProjectsAPI]);
 
    const renderProjects = () => {
       if (isFetching(getProjectsAPIStatus)) {

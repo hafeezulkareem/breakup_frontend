@@ -19,7 +19,7 @@ class AuthStore {
    @observable signInAPIError!: string;
    @observable signUpAPIStatus!: number;
    @observable signUpAPIError!: string;
-   user!: null | UserModel;
+   @observable user!: null | UserModel;
 
    constructor(authService: AuthService) {
       makeObservable(this);

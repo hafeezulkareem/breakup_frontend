@@ -90,9 +90,8 @@ class ProjectsStore {
       onSuccess: Function = (): void => {},
       onFailure: Function = (): void => {}
    ) {
-      const createProjectAPIPromise = this.projectsService.createProjectAPI(
-         data
-      );
+      const createProjectAPIPromise =
+         this.projectsService.createProjectAPI(data);
       this.setCreateProjectAPIStatus(apiStatus.loading);
       const { title, description } = data;
       await createProjectAPIPromise
@@ -121,6 +120,7 @@ class ProjectsStore {
    @action.bound
    setGetProjectsAPIResponse(response: Array<GetProjectsAPIResponse> | null) {
       if (response) {
+         this.miniProjects = [];
          response.forEach((project) => {
             const { id, title, description } = project;
             this.miniProjects.push(
@@ -182,9 +182,8 @@ class ProjectsStore {
       onSuccess: Function = (): void => {},
       onFailure: Function = (): void => {}
    ) {
-      const getProjectDetailsAPIPromise = this.projectsService.getProjectDetailsAPI(
-         id
-      );
+      const getProjectDetailsAPIPromise =
+         this.projectsService.getProjectDetailsAPI(id);
       this.setGetProjectDetailsAPIStatus(apiStatus.loading);
       await getProjectDetailsAPIPromise
          .then((data) => {
