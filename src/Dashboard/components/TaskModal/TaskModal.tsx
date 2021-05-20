@@ -32,10 +32,11 @@ const TaskModal = observer((props) => {
       updateTaskModalVisibility(false);
    };
 
-   let assignMemberAPI, assignee;
+   let assignMemberAPI, assignee, title;
    if (task) {
       assignMemberAPI = task.assignMemberAPI;
       assignee = task.assignee;
+      title = task.title;
    }
 
    return (
@@ -49,7 +50,7 @@ const TaskModal = observer((props) => {
       >
          <TaskModalContainer>
             <TaskTitleBar>
-               <TaskTitle>Task Title</TaskTitle>
+               <TaskTitle>{title}</TaskTitle>
                <TaskModalCloseButton disableShadow onClick={closeModal}>
                   <RiCloseCircleFill size={20} color={colors.persianRed} />
                </TaskModalCloseButton>
