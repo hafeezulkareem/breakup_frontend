@@ -10,7 +10,7 @@ export const ProjectStageContainer = styled.div`
         mr-16px px-12px shadow-sm rounded-8px pb-12px bg-darkGray10
     `}
    height: fit-content;
-   ${`min-width: ${screenSize / 4 - 65}px;`}
+   ${`min-width: ${screenSize / 4 - 60}px;`}
 `;
 
 export const StageTitleBar = styled.div`

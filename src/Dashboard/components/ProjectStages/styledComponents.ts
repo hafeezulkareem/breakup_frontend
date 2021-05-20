@@ -15,7 +15,7 @@ export const StageContainer = styled.div`
    ${tw`
         flex flex-col pr-16px
     `}
-   ${`min-width: ${screenSize / 4 - 42}px;`}
+   ${`min-width: ${screenSize / 4 - 62}px;`}
 `;
 
 export const CenterContainer = styled(StagesContainer)`
