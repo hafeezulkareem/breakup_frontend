@@ -15,7 +15,7 @@ import { TasksStore } from "../../Dashboard/stores/TasksStore";
 import { TaskUIStore } from "../../Dashboard/stores/TaskUIStore";
 import { UIStore } from "../../Dashboard/stores/UIStore";
 
-const useFixtures = true;
+const useFixtures = false;
 
 function getUserAPIFixtures() {
    if (useFixtures) {
