@@ -29,7 +29,7 @@ class StagesAPIs implements StagesService {
    deleteStageAPI(projectId: string, stageId: string) {
       return networkCallWithAxios(
          this.api,
-         `${endpoints.project}${projectId}/${endpoints.stage}${stageId}/delete/`,
+         `${endpoints.project}${projectId}${endpoints.stage}${stageId}/delete/`,
          {},
          apiMethods.delete,
          true
