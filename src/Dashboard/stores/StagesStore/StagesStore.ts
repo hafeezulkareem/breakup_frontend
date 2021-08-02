@@ -23,6 +23,8 @@ class StagesStore {
    @observable createStageAPIError!: string;
    @observable reorderStageAPIStatus!: number;
    @observable reorderStageAPIError!: string;
+   @observable deleteStageAPIStatus!: number;
+   @observable deleteStageAPIError!: string;
 
    constructor(stagesService: StagesService, tasksStore: TasksStore) {
       makeObservable(this);
@@ -39,6 +41,8 @@ class StagesStore {
       this.createStageAPIError = "";
       this.reorderStageAPIStatus = 0;
       this.reorderStageAPIError = "";
+      this.deleteStageAPIStatus = 0;
+      this.deleteStageAPIError = "";
    }
 
    @action.bound
@@ -136,6 +140,45 @@ class StagesStore {
             this.setReorderStageAPIStatus(apiStatus.failed);
             this.setReorderStageAPIError(err);
             onFailure();
+         });
+   }
+
+   @action.bound
+   setDeleteStageAPIStatus(status: number): void {
+      this.deleteStageAPIStatus = status;
+   }
+   @action.bound
+   setDeleteStageAPIError(error): void {
+      this.deleteStageAPIError = getParsedErrorMessage(error);
+   }
+
+   @action.bound
+   deleteStage(id: string): void {
+      this.stages = this.stages.filter((stage) => stage.id !== id);
+   }
+
+   @action.bound
+   async deleteStageAPI(
+      projectId: string,
+      stageId: string,
+      onSuccess: Function = (): void => {},
+      onFailure: Function = (): void => {}
+   ) {
+      const deleteStagePromise = this.stagesService.deleteStageAPI(
+         projectId,
+         stageId
+      );
+      this.setDeleteStageAPIStatus(apiStatus.loading);
+      await deleteStagePromise
+         .then((data) => {
+            this.setDeleteStageAPIStatus(apiStatus.success);
+            this.deleteStage(stageId);
+            onSuccess();
+         })
+         .catch((err) => {
+            this.setDeleteStageAPIStatus(apiStatus.failed);
+            this.setDeleteStageAPIError(err);
+            onFailure(this.deleteStageAPIError);
          });
    }
 }

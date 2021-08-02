@@ -26,6 +26,16 @@ class StagesAPIs implements StagesService {
       );
    }
 
+   deleteStageAPI(projectId: string, stageId: string) {
+      return networkCallWithAxios(
+         this.api,
+         `${endpoints.project}${projectId}/${endpoints.stage}${stageId}/delete/`,
+         {},
+         apiMethods.delete,
+         true
+      );
+   }
+
    reorderStageAPI(
       projectId: string,
       stageId: string,

@@ -10,6 +10,8 @@ export interface StagesService {
       data: CreateStageAPIRequest
    ) => Promise<CreateAPIResponse>;
 
+   deleteStageAPI: (projectId: string, stageId: string) => Promise<{}>;
+
    reorderStageAPI: (
       projectId: string,
       stageId: string,

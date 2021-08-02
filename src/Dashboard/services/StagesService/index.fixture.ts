@@ -9,6 +9,10 @@ class StagesFixtures implements StagesService {
       return resolveWithTimeOut(createStageAPIResponse);
    }
 
+   deleteStageAPI() {
+      return resolveWithTimeOut({});
+   }
+
    reorderStageAPI() {
       return resolveWithTimeOut({});
    }
