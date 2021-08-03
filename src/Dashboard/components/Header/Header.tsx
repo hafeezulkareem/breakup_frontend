@@ -25,7 +25,7 @@ const Header = observer((props: HeaderProps) => {
    const { titleAndNavigation } = props;
 
    const {
-      authStore: { user },
+      userStore: { user },
    } = useStores();
 
    let name = "";

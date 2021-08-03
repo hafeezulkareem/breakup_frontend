@@ -14,6 +14,7 @@ import { StagesStore } from "../../Dashboard/stores/StagesStore";
 import { TasksStore } from "../../Dashboard/stores/TasksStore";
 import { TaskUIStore } from "../../Dashboard/stores/TaskUIStore";
 import { UIStore } from "../../Dashboard/stores/UIStore";
+import { UserStore } from "../../User/stores/UserStore";
 
 const useFixtures = false;
 
@@ -45,7 +46,8 @@ function getTasksFixtures() {
    return new TasksAPIs();
 }
 
-const authStore = new AuthStore(getUserAPIFixtures());
+const userStore = new UserStore();
+const authStore = new AuthStore(getUserAPIFixtures(), userStore);
 const uiStore = new UIStore();
 const tasksStore = new TasksStore(getTasksFixtures());
 const stagesStore = new StagesStore(getStagesFixtures(), tasksStore);
@@ -53,6 +55,7 @@ const projectsStore = new ProjectsStore(getProjectsFixtures(), stagesStore);
 const taskUIStore = new TaskUIStore();
 
 export const stores = {
+   userStore,
    authStore,
    uiStore,
    projectsStore,

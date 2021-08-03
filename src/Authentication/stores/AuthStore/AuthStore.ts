@@ -3,6 +3,7 @@ import { action, makeObservable, observable } from "mobx";
 import { apiStatus } from "../../../Common/constants/APIConstants";
 import { getParsedErrorMessage } from "../../../Common/utils/APIUtils";
 import { setToken } from "../../../Common/utils/StorageUtils";
+import { UserStore } from "../../../User/stores/UserStore";
 
 import { AuthService } from "../../services/AuthService";
 import {
@@ -11,25 +12,23 @@ import {
    SignUpAPIRequest,
 } from "../../types";
 
-import { UserModel } from "../models/UserModel";
-
 class AuthStore {
    authService: AuthService;
    @observable signInAPIStatus!: number;
    @observable signInAPIError!: string;
    @observable signUpAPIStatus!: number;
    @observable signUpAPIError!: string;
-   @observable user!: null | UserModel;
+   userStore: UserStore;
 
-   constructor(authService: AuthService) {
+   constructor(authService: AuthService, userStore: UserStore) {
       makeObservable(this);
       this.authService = authService;
+      this.userStore = userStore;
       this.init();
    }
 
    @action.bound
    init() {
-      this.user = null;
       this.signInAPIStatus = 0;
       this.signInAPIError = "";
       this.signUpAPIStatus = 0;
@@ -54,7 +53,7 @@ class AuthStore {
    ) {
       if (response) {
          const { id, name, token } = response;
-         this.user = new UserModel({ id, name, email, password });
+         this.userStore.setUserDetails({ id, name, email, password });
          setToken(token);
       }
    }
