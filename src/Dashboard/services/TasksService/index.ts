@@ -23,4 +23,6 @@ export interface TasksService {
       taskId: string,
       data: AssignMemberAPIRequest
    ) => Promise<{}>;
+
+   deleteTaskAPI: (stageId: string, taskId: string) => Promise<{}>;
 }

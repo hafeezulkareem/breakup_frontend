@@ -3,18 +3,22 @@ import { observer } from "mobx-react-lite";
 import Modal from "react-modal";
 import { RiCloseCircleFill } from "react-icons/ri";
 import Avatar from "react-avatar";
+import cogoToast from "cogo-toast";
 
 import { useStores } from "../../../Common/stores";
 import { colors } from "../../../Common/themes/colors";
+import Button from "../../../Common/components/Button";
 
 import { TaskDescription } from "../TaskDescription";
 import { TaskAssignMember } from "../TaskAssignMember";
 
 import {
+   DeleteButton,
    TaskAssigneeDetailsContainer,
    TaskDetailsContainer,
    TaskDetailsLeftContainer,
    TaskDetailsRightContainer,
+   TaskFooter,
    TaskModalCloseButton,
    TaskModalContainer,
    TaskRightSectionTitle,
@@ -22,10 +26,12 @@ import {
    TaskTitleBar,
 } from "./styledComponents";
 import "./styles.css";
+import { isFetching } from "../../../Common/utils/APIUtils";
 
 const TaskModal = observer((props) => {
    const {
-      taskUIStore: { showTaskModal, updateTaskModalVisibility, task },
+      taskUIStore: { showTaskModal, updateTaskModalVisibility, task, stageId },
+      tasksStore: { deleteTaskAPI, deleteTaskAPIStatus },
    } = useStores();
 
    const closeModal = () => {
@@ -38,6 +44,26 @@ const TaskModal = observer((props) => {
       assignee = task.assignee;
       title = task.title;
    }
+
+   const onFailureTaskDeleteAPI = (error: string) => {
+      cogoToast.error(error, { position: "bottom-center" });
+   };
+
+   const onSuccessTaskDeleteAPI = () => {
+      closeModal();
+      cogoToast.success("Task deleted successfully", {
+         position: "bottom-center",
+      });
+   };
+
+   const deleteTask = () => {
+      deleteTaskAPI(
+         stageId,
+         task?.id as string,
+         onSuccessTaskDeleteAPI,
+         onFailureTaskDeleteAPI
+      );
+   };
 
    return (
       <Modal
@@ -71,6 +97,15 @@ const TaskModal = observer((props) => {
                   <TaskAssignMember assignMemberAPI={assignMemberAPI} />
                </TaskDetailsRightContainer>
             </TaskDetailsContainer>
+            <TaskFooter>
+               <DeleteButton
+                  color={Button.colors.danger}
+                  loading={isFetching(deleteTaskAPIStatus)}
+                  onClick={deleteTask}
+               >
+                  Delete
+               </DeleteButton>
+            </TaskFooter>
          </TaskModalContainer>
       </Modal>
    );

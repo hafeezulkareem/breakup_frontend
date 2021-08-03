@@ -20,6 +20,10 @@ class TasksFixture implements TasksService {
    assignMemberAPI() {
       return resolveWithTimeOut({});
    }
+
+   deleteTaskAPI() {
+      return resolveWithTimeOut({});
+   }
 }
 
 export { TasksFixture };

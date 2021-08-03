@@ -16,15 +16,16 @@ interface StageTasksProps {
 
 interface TasksProps {
    tasks: Array<TaskModel>;
+   stageId: string;
 }
 
 const Tasks = observer((props: TasksProps) => {
-   const { tasks } = props;
+   const { tasks, stageId } = props;
 
    return (
       <>
          {tasks.map((task: TaskModel, index: number) => (
-            <Task task={task} index={index} key={task.id} />
+            <Task task={task} index={index} key={task.id} stageId={stageId} />
          ))}
       </>
    );
@@ -47,7 +48,7 @@ const StageTasks = observer((props: StageTasksProps) => {
                {...provided.droppableProps}
                margin={stageTasks.length > 0 ? true : false}
             >
-               <Tasks tasks={stageTasks} />
+               <Tasks tasks={stageTasks} stageId={stageId} />
                {provided.placeholder}
             </TasksContainer>
          )}

@@ -60,6 +60,16 @@ class TasksAPIs implements TasksService {
          true
       );
    }
+
+   deleteTaskAPI(stageId: string, taskId: string) {
+      return networkCallWithAxios(
+         this.api,
+         `${endpoints.stage}${stageId}${endpoints.task}${taskId}/delete/`,
+         {},
+         apiMethods.delete,
+         true
+      );
+   }
 }
 
 export { TasksAPIs };

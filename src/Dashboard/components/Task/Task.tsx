@@ -18,6 +18,7 @@ import { useStores } from "../../../Common/stores";
 interface TaskProps {
    task: TaskModel;
    index: number;
+   stageId: string;
 }
 
 const Task = observer((props: TaskProps) => {
@@ -31,8 +32,8 @@ const Task = observer((props: TaskProps) => {
    } = useStores();
 
    const openTaskModal = () => {
-      const { task } = props;
-      setTask(task);
+      const { task, stageId } = props;
+      setTask(task, stageId);
       updateTaskModalVisibility(true);
    };
 

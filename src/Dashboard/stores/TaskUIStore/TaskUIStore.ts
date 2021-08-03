@@ -5,6 +5,7 @@ import { TaskModel } from "../models/TaskModel";
 class TaskUIStore {
    @observable showTaskModal!: boolean;
    @observable task!: TaskModel | null;
+   @observable stageId!: string;
 
    constructor() {
       makeObservable(this);
@@ -15,6 +16,7 @@ class TaskUIStore {
    init() {
       this.showTaskModal = false;
       this.task = null;
+      this.stageId = "";
    }
 
    @action.bound
@@ -23,7 +25,8 @@ class TaskUIStore {
    }
 
    @action.bound
-   setTask(task: TaskModel) {
+   setTask(task: TaskModel, stageId: string) {
+      this.stageId = stageId;
       this.task = task;
    }
 

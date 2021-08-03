@@ -66,3 +66,11 @@ export const TaskRightSectionTitle = styled.span`
         text-14px text-sanJuan font-bold
     `}
 `;
+
+export const TaskFooter = styled.div`
+   ${tw`
+        flex justify-end mt-8px
+    `}
+`;
+
+export const DeleteButton = styled(Button)``;
