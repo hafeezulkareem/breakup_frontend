@@ -19,6 +19,10 @@ const MenuDropdown = (props: MenuDropdownProps) => {
       history.replace("/sign-in");
    };
 
+   const goToProfile = () => {
+      history.push("/profile");
+   };
+
    return (
       <BaseDropdown>
          {(onTrigger, show) => (
@@ -29,6 +33,7 @@ const MenuDropdown = (props: MenuDropdownProps) => {
                </DropDownButton>
                {show && (
                   <Menu>
+                     <MenuItem onClick={goToProfile}>Profile</MenuItem>
                      <MenuItem onClick={logout}>Logout</MenuItem>
                   </Menu>
                )}

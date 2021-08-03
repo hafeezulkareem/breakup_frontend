@@ -9,6 +9,7 @@ import { DashboardRoute } from "./Dashboard/routes/DashboardRoute";
 import { AddProjectModal } from "./Dashboard/components/AddProjectModal";
 import { ProjectRoute } from "./Dashboard/routes/ProjectRoute";
 import { TaskModal } from "./Dashboard/components/TaskModal";
+import { ProfileRoute } from "./User/routes/ProfileRoute";
 
 function App() {
    return (
@@ -19,6 +20,7 @@ function App() {
                <Route path="/sign-up" component={SignUpRoute} exact />
                <Route path="/" component={DashboardRoute} exact />
                <Route path="/project/:id" component={ProjectRoute} exact />
+               <Route path="/profile" component={ProfileRoute} exact />
                <Route path="*" component={PageNotFound} />
             </Switch>
          </Router>
