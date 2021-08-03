@@ -6,6 +6,8 @@ import { History } from "history";
 import { isSignedIn } from "../../../Common/utils/AuthUtils";
 import { Header } from "../../../Dashboard/components/Header";
 
+import { Profile } from "../../components/Profile";
+
 import { Container, ProfileContainer } from "./styledComponents";
 
 interface ProfileRouteProps {
@@ -13,8 +15,6 @@ interface ProfileRouteProps {
 }
 
 const ProfileRoute = observer((props: ProfileRouteProps) => {
-   const { history } = props;
-
    if (!isSignedIn()) {
       return <Redirect to="/sign-in" />;
    }
@@ -22,7 +22,9 @@ const ProfileRoute = observer((props: ProfileRouteProps) => {
    return (
       <ProfileContainer>
          <Header />
-         <Container></Container>
+         <Container>
+            <Profile />
+         </Container>
       </ProfileContainer>
    );
 });

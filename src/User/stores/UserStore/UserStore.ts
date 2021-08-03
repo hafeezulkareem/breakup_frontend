@@ -16,6 +16,7 @@ class UserStore {
 
    @action.bound
    setUserDetails({ id, name, email, password }) {
+      localStorage.setItem("userDetails", JSON.stringify({ name, email }));
       this.user = new UserModel({ id, name, email, password });
    }
 }
