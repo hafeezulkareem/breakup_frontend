@@ -3,7 +3,10 @@ import { observer } from "mobx-react-lite";
 import { GrEdit } from "react-icons/gr";
 import { Draggable, DraggableStateSnapshot } from "react-beautiful-dnd";
 
+import { useStores } from "../../../Common/stores";
+
 import { TaskModel } from "../../stores/models/TaskModel";
+import { RAISE_BUG, RESOLVE_BUG } from "../../constants/UIConstants";
 
 import {
    EditButton,
@@ -13,7 +16,6 @@ import {
    TaskTitleContainer,
    TitleBar,
 } from "./styledComponents";
-import { useStores } from "../../../Common/stores";
 
 interface TaskProps {
    task: TaskModel;
@@ -23,7 +25,7 @@ interface TaskProps {
 
 const Task = observer((props: TaskProps) => {
    const {
-      task: { id, title },
+      task: { id, title, status },
       index,
    } = props;
 
@@ -49,6 +51,14 @@ const Task = observer((props: TaskProps) => {
                   <TaskContainer
                      isDragging={snapshot.isDragging}
                      onClick={openTaskModal}
+                     style={{
+                        backgroundColor:
+                           status === RAISE_BUG
+                              ? "crimson"
+                              : status === RESOLVE_BUG
+                              ? "seagreen"
+                              : "",
+                     }}
                   >
                      <TitleBar>
                         <TaskTitleContainer>

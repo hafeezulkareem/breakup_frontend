@@ -16,6 +16,7 @@ export interface GetProjectsAPIResponse {
 interface TaskResponse {
    id: string;
    title: string;
+   status: string;
    description: string;
    assignee: { name: string; email: string };
 }
@@ -40,6 +41,7 @@ export interface CreateStageAPIRequest {
 
 export interface CreateTaskAPIRequest {
    title: string;
+   status: string;
 }
 
 export interface ReorderAPIRequest {

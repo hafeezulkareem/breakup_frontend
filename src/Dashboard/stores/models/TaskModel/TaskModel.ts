@@ -12,6 +12,7 @@ import {
 class TaskModel {
    id: string;
    @observable title: string;
+   @observable status: string;
    @observable description: string;
    @observable assignee: { name: string; email: string };
    tasksService: TasksService;
@@ -22,12 +23,13 @@ class TaskModel {
 
    constructor(
       tasksService: TasksService,
-      { id, title, description, assignee }
+      { id, title, status, description, assignee }
    ) {
       makeObservable(this);
       this.tasksService = tasksService;
       this.id = id;
       this.title = title;
+      this.status = status;
       this.description = description;
       this.assignee = assignee;
       this.init();

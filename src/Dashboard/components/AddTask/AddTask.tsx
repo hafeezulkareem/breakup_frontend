@@ -17,6 +17,7 @@ import {
    ButtonsContainer,
    CancelButton,
 } from "./styledComponents";
+import Dropdown from "./Dropdown";
 
 interface AddTaskProps {
    projectId: string;
@@ -28,6 +29,7 @@ const AddTask = observer((props: AddTaskProps) => {
 
    const [addTask, setAddTask] = useState(false);
    const [taskTitle, setTaskTitle] = useState("");
+   const [taskStatus, setTaskStatus] = useState<any>("");
    const {
       tasksStore: { createTaskAPI, createTaskAPIStatus, createTaskAPIError },
    } = useStores();
@@ -51,15 +53,15 @@ const AddTask = observer((props: AddTaskProps) => {
    };
 
    const validateAndAddTask = (event) => {
-      if (taskTitle.length) {
+      if (taskTitle.length && taskStatus !== "") {
          createTaskAPI(
             stageId,
-            { title: taskTitle },
+            { title: taskTitle, status: taskStatus.value },
             onSuccessCreateTaskAPI,
             onFailureCreateTaskAPI
          );
       } else {
-         cogoToast.error("Task title is required", {
+         cogoToast.error("Task title and status are required", {
             position: "bottom-center",
          });
       }
@@ -75,6 +77,7 @@ const AddTask = observer((props: AddTaskProps) => {
             onChange={(event) => setTaskTitle(event.target.value)}
             autoFocus={true}
          />
+         <Dropdown status={taskStatus} setStatus={setTaskStatus} />
          <ButtonsContainer>
             <AddButton
                color={Button.colors.primary}

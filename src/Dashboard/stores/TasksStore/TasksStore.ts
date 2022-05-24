@@ -52,10 +52,11 @@ class TasksStore {
       stages.forEach((stage) => {
          const { id, tasks } = stage;
          const taskModels = tasks.map((task) => {
-            const { id, title, description, assignee } = task;
+            const { id, title, status, description, assignee } = task;
             return new TaskModel(this.tasksService, {
                id,
                title,
+               status,
                description,
                assignee,
             });
@@ -99,7 +100,8 @@ class TasksStore {
    setCreateTaskAPIResponse(
       response: CreateAPIResponse | null,
       stageId: string,
-      title: string
+      title: string,
+      status: string
    ) {
       if (response) {
          const { id } = response;
@@ -107,6 +109,7 @@ class TasksStore {
             new TaskModel(this.tasksService, {
                id,
                title,
+               status,
                description: "",
                assignee: {},
             })
@@ -125,12 +128,12 @@ class TasksStore {
          stageId,
          data
       );
-      const { title } = data;
+      const { title, status } = data;
       this.setCreateTaskAPIStatus(apiStatus.loading);
       await createTaskAPIPromise
          .then((data) => {
             this.setCreateTaskAPIStatus(apiStatus.success);
-            this.setCreateTaskAPIResponse(data, stageId, title);
+            this.setCreateTaskAPIResponse(data, stageId, title, status);
             onSuccess();
          })
          .catch((err) => {
